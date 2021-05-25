@@ -4,10 +4,9 @@ import * as auth from '../services/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 
-
 interface User {
-    name: string;
-    email: string;
+  name: string;
+  email: string;
 }
 
 interface AuthContextData {
@@ -21,17 +20,16 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({children}) => {
   const [user, setUser] = useState<User | null>(null);
-//   const [setLoading] = useState(true);
+  //   const [setLoading] = useState(true);
 
   useEffect(() => {
     async function loadStoragedData() {
       const storagedUser = await AsyncStorage.getItem('@GAAuth:user');
       const storagedToken = await AsyncStorage.getItem('@GAToken:token');
 
-        await new Promise ((resolve) => setTimeout(resolve, 2000));
+      // await new Promise(resolve => setTimeout(resolve, 2000));
 
       if (storagedUser && storagedToken) {
-
         api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
 
         setUser(JSON.parse(storagedUser));
@@ -45,7 +43,7 @@ export const AuthProvider = ({children}) => {
     const response = await auth.signIn();
 
     setUser(response.user);
-
+    console.log(response.user);
     api.defaults.headers.Authorization = `Bearer ${response.token}`;
 
     await AsyncStorage.setItem('@GAAuth:user', JSON.stringify(response.user));
@@ -61,13 +59,13 @@ export const AuthProvider = ({children}) => {
     });
   }
 
-//   if (loading) {
-//     return (
-//       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-//         <ActivityIndicator size="large" color="#DDDDDD" />
-//       </View>
-//     );
-//   }
+  //   if (loading) {
+  //     return (
+  //       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  //         <ActivityIndicator size="large" color="#DDDDDD" />
+  //       </View>
+  //     );
+  //   }
 
   return (
     <AuthContext.Provider value={{signed: !!user, user, signIn, signOut}}>
@@ -79,7 +77,7 @@ export const AuthProvider = ({children}) => {
 // export default AuthContext;
 
 export function useAuth() {
-    const context = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
-    return context;
+  return context;
 }
