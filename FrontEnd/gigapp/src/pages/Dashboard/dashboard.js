@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-import {signIn} from '../../services/auth';
 import {useAuth} from '../../contexts/auth';
 
 const Dashboard = () => {
