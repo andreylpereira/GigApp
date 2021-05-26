@@ -88,7 +88,6 @@ const Login = ({navigation}) => {
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
       <KeyboardAvoidingView style={css.container}>
-  
         <View>
           <Animated.Image
             style={{width: logo.x, height: logo.y}}
@@ -96,34 +95,34 @@ const Login = ({navigation}) => {
           />
 
           <Text style={css.subtitle}>GigApp</Text>
-        </View> 
+        </View>
         <Animated.View
           style={{
             opacity: opacity,
             transform: [{translateY: offset.y}],
-          }}> 
-        <TextInput
-          style={css.input}
-          placeholder="E-mail"
-          textContentType={'emailAddress'}
-          autoCorrect={false}
-        />
-        <TextInput
-          style={css.input}
-          placeholder="Senha"
-          textContentType={'password'}
-          secureTextEntry={true}
-          autoCorrect={false}
-        />
+          }}>
+          <TextInput
+            style={css.input}
+            placeholder="E-mail"
+            textContentType={'emailAddress'}
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Senha"
+            textContentType={'password'}
+            secureTextEntry={true}
+            autoCorrect={false}
+          />
 
-        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-          <Text style={css.cadastrar}>Cadastrar-se</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+            <Text style={css.cadastrar}>Cadastrar-se</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={css.button} onPress={handleSignIn}>
-          <Text style={css.buttonText}>Entrar</Text>
-        </TouchableOpacity>
-        </Animated.View> 
+          <TouchableOpacity style={css.button} onPress={handleSignIn}>
+            <Text style={css.buttonText}>Entrar</Text>
+          </TouchableOpacity>
+        </Animated.View>
       </KeyboardAvoidingView>
     </>
   );

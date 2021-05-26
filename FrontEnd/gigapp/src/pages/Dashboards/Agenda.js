@@ -211,7 +211,7 @@ const Agenda = ({navigation}) => {
     };
     return (
       <View style={css.containerList}>
-       <Text style={css.title}>Agenda</Text>
+        <Text style={css.title}>Agenda</Text>
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}

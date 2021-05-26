@@ -11,18 +11,27 @@ import {
 } from 'react-native';
 
 const SelecaoBanda = ({navigation}) => {
-  const [bandas1] = useState(['Selecione a banda 1','Barões da Pisadinha', 'Dazaranha', 'Tchê garotos']);
+  const [bandas1] = useState([
+    'Selecione a banda 1',
+    'Barões da Pisadinha',
+    'Dazaranha',
+    'Tchê garotos',
+  ]);
   const [bandaSelecionada1, setBandaSelecionada1] = useState([]);
-  const [bandas2] = useState(['Selecione a banda 2','Barões da Pisadinha', 'Dazaranha', 'Tchê garotos']);
+  const [bandas2] = useState([
+    'Selecione a banda 2',
+    'Barões da Pisadinha',
+    'Dazaranha',
+    'Tchê garotos',
+  ]);
   const [bandaSelecionada2, setBandaSelecionada2] = useState([]);
-
 
   const selecionarBandas = async () => {
     if (bandaSelecionada1 && bandaSelecionada2) {
       try {
         // const response = await api.post('/novasTarefas', { "nome": nomeLista, "descricao": descricaoLista, "data": dataLista });
         // console.log(JSON.stringify(response.data));
-        
+
         console.log('Banda 1:' + ' ' + bandaSelecionada1);
         console.log('Banda 2:' + ' ' + bandaSelecionada2);
       } catch (error) {
@@ -39,7 +48,6 @@ const SelecaoBanda = ({navigation}) => {
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
       <View style={css.container}>
-
         <Text style={css.tittle}>Selecione a banda nº 1</Text>
         <View style={css.input}>
           <Picker
@@ -71,17 +79,15 @@ const SelecaoBanda = ({navigation}) => {
             {bandas2.map((itemValue, itemIndex) => {
               return (
                 <Picker.Item
-                label={itemValue}
-                value={itemValue}
+                  label={itemValue}
+                  value={itemValue}
                   key={itemIndex}
                 />
               );
             })}
           </Picker>
         </View>
-        <TouchableOpacity
-          style={css.button}
-          onPress={() => selecionarBandas()}>
+        <TouchableOpacity style={css.button} onPress={() => selecionarBandas()}>
           <Text style={css.buttonText}>Selecionar</Text>
         </TouchableOpacity>
       </View>
@@ -132,8 +138,8 @@ const css = StyleSheet.create({
   tittle: {
     fontFamily: 'Nunito-Black',
     fontSize: 18,
-    marginBottom: 5
-  }
+    marginBottom: 5,
+  },
 });
 
 export default SelecaoBanda;

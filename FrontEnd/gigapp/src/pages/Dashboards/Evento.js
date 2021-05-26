@@ -1,9 +1,14 @@
 import React, {useState, useContext} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import {FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAuth} from '../../contexts/auth';
-
 
 const Evento = ({navigation}) => {
   const eventos_mock = [

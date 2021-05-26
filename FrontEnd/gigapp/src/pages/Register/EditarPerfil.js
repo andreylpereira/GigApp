@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {useAuth} from '../../contexts/auth';
+
 import {
   StatusBar,
   StyleSheet,
@@ -7,134 +9,125 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 
 const EditarPerfil = ({navigation}) => {
-  function Perfils(perfil) {
-    if (perfil == 'Banda') {
-      return (
-        <KeyboardAvoidingView>
-          <StatusBar barStyle="dark-content" hidden={true} />
-          <View style={css.container}>
-            <TextInput
-              style={css.input}
-              placeholder="Nome"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="E-mail"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Senha"
-              textContentType={'password'}
-              secureTextEntry={true}
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Confirmar senha"
-              textContentType={'password'}
-              secureTextEntry={true}
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Telefone"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Estilo musical"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.description}
-              placeholder="Descrição"
-              multiline={true}
-              numberOfLines={5}
-              autoCorrect={false}
-            />
+  const {user} = useAuth();
 
-            <TouchableOpacity
-              style={css.button}
-              onPress={() => navigation.navigate('Login')}>
-              <Text style={css.buttonText}>Editar</Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
-      );
-    }
-    if (perfil == 'Estabelecimento') {
-      return (
-        <View>
-          <StatusBar barStyle="dark-content" hidden={true} />
-          <KeyboardAvoidingView style={css.container}>
-            <TextInput
-              style={css.input}
-              placeholder="Nome"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="E-mail"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Senha"
-              textContentType={'password'}
-              secureTextEntry={true}
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Confirmar senha"
-              textContentType={'password'}
-              secureTextEntry={true}
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Telefone"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Endereço"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Cidade"
-              autoCorrect={false}
-            />
-            <TextInput
-              style={css.input}
-              placeholder="Estado"
-              autoCorrect={false}
-            />
+  if (user.perfil == 'banda') {
+    return (
+      <KeyboardAvoidingView>
+        <StatusBar barStyle="dark-content" hidden={true} />
+        <View style={css.container}>
+          <TextInput style={css.input} placeholder="Nome" autoCorrect={false} />
+          <TextInput
+            style={css.input}
+            placeholder="E-mail"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Senha"
+            textContentType={'password'}
+            secureTextEntry={true}
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Confirmar senha"
+            textContentType={'password'}
+            secureTextEntry={true}
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Telefone"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Estilo musical"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.description}
+            placeholder="Descrição"
+            multiline={true}
+            numberOfLines={5}
+            autoCorrect={false}
+          />
 
-            <TouchableOpacity
-              style={css.button}
-              onPress={() => navigation.navigate('Login')}>
-              <Text style={css.buttonText}>Editar</Text>
-            </TouchableOpacity>
-          </KeyboardAvoidingView>
+          <TouchableOpacity
+            style={css.button}
+            onPress={() => navigation.navigate('Login')}>
+            <Text style={css.buttonText}>Editar</Text>
+          </TouchableOpacity>
         </View>
-      );
-    } else {
-      return (
-        <View>
-          <Text style={css.error}>Error ao carregar</Text>
-        </View>
-      );
-    }
+      </KeyboardAvoidingView>
+    );
   }
-  return <>{Perfils('Estabelecimento')}</>;
+  if (user.perfil == 'estabelecimento') {
+    return (
+      <View>
+        <StatusBar barStyle="dark-content" hidden={true} />
+        <KeyboardAvoidingView style={css.container}>
+          <TextInput style={css.input} placeholder="Nome" autoCorrect={false} />
+          <TextInput
+            style={css.input}
+            placeholder="E-mail"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Senha"
+            textContentType={'password'}
+            secureTextEntry={true}
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Confirmar senha"
+            textContentType={'password'}
+            secureTextEntry={true}
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Telefone"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Endereço"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Cidade"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={css.input}
+            placeholder="Estado"
+            autoCorrect={false}
+          />
+
+          <TouchableOpacity
+            style={css.button}
+            onPress={() => navigation.navigate('Login')}>
+            <Text style={css.buttonText}>Editar</Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </View>
+    );
+  } else {
+    return (
+      <View>
+        <Text style={css.error}>Error ao carregar</Text>
+      </View>
+    );
+  }
 };
 
 const css = StyleSheet.create({

@@ -8,7 +8,7 @@ import {
   View,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Keyboard
+  Keyboard,
 } from 'react-native';
 
 import DatePicker from 'react-native-datepicker';
@@ -19,7 +19,6 @@ const CadastroEvento = ({navigation}) => {
   const [valorEvento, setValorEvento] = useState('');
   const [dataInicial, setDataInicial] = useState(new Date());
   const dataLista = dataInicial;
-
 
   //fazer validações
   const createEvento = async () => {
@@ -74,7 +73,7 @@ const CadastroEvento = ({navigation}) => {
         />
         <TextInput
           style={css.input}
-          keyboardType = 'numeric'
+          keyboardType="numeric"
           placeholder="Valor"
           autoCorrect={false}
           value={valorEvento}
@@ -94,10 +93,8 @@ const CadastroEvento = ({navigation}) => {
           }}
         />
 
-        <TouchableOpacity
-          style={css.button}
-          onPress={() => createEvento()}>
-                 {/* 
+        <TouchableOpacity style={css.button} onPress={() => createEvento()}>
+          {/* 
           style={css.button}
           onPress={() => navigation.goBack()}>   */}
           <Text style={css.buttonText}>Criar</Text>

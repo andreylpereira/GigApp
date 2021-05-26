@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 
 const CadastroEstabelecimento = ({navigation}) => {
