@@ -142,6 +142,14 @@ const Evento = ({navigation}) => {
       return (
         <View>
           <View style={css.icons}>
+          <View style={css.iconMaps}>
+              <Icon
+                name={'locate'}
+                size={16}
+                color={'#FF6400'}
+                onPress={() => navigation.navigate('Maps')}
+              />
+            </View>
             <View style={css.iconEdit}>
               <Icon
                 name={'pencil-outline'}
@@ -299,6 +307,16 @@ const css = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     marginTop: 5,
+  },
+  iconMaps: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 4.5,
+    padding: 4,
+    paddingLeft: 4,
+    elevation: 7.5,
+    marginRight: '1%',
   },
   iconEdit: {
     borderWidth: 1,
