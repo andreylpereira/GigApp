@@ -6,6 +6,7 @@ import AuthMiddleware from './app/middlewares/auth';
 import UserController from './app/controllers/UserController';
 import BandController from './app/controllers/BandController';
 import VenueController from './app/controllers/VenueController';
+import ConcertController from './app/controllers/ConcertController';
 
 const routes = new Router();
 
@@ -26,8 +27,12 @@ routes.post('/users', UserController.store);
 routes.get('/bands', BandController.show);
 routes.post('/bands', BandController.store);
 
-routes.get('/venues', VenueController.show);
-routes.post('/venues', VenueController.store);
+// routes.get('/venues', VenueController.show);
+// routes.post('/venues', VenueController.store);
+
+routes.get('/concerts', ConcertController.show);
+routes.post('/concerts', ConcertController.store);
+
 
 routes.post('/sessions', SessionController.store);
 //routes.post('/sessions', SessionController.store.bind(SessionController));
