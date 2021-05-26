@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import {signIn} from '../../services/auth';
-import {useAuth} from '../../contexts/auth';
+import {useAuth} from '../../context/auth';
 
 const Login = ({navigation}) => {
   const {signed, user, signIn} = useAuth();

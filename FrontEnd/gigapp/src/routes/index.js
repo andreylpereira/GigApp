@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useAuth} from '../contexts/auth';
+import {useAuth} from '../context/auth';
 import AuthRoutes from './auth.routes';
 import AppRoutes from './app.routes';
 
