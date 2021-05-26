@@ -92,7 +92,7 @@ const Login = ({navigation}) => {
         <View>
           <Animated.Image
             style={{width: logo.x, height: logo.y}}
-            source={require('./assets/logo.png')}
+            source={require('../../assets/imagens/logo.png')}
           />
 
           <Text style={css.subtitle}>GigApp</Text>
