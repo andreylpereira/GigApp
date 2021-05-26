@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../pages/Dashboard/Home';
+import Home from '../pages/Dashboards/Home';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
