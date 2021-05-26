@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
   StatusBar,
@@ -12,8 +12,10 @@ import {
 } from 'react-native';
 
 import DatePicker from 'react-native-datepicker';
+import api from '../services/axios';
 
-const CadastroEvento = ({navigation}) => {
+const CadastroEvento = ({ navigation }) => {
+
   const [nomeEvento, setNomeEvento] = useState('');
   const [descricaoEvento, setDescricaoEvento] = useState('');
   const [valorEvento, setValorEvento] = useState('');
@@ -24,15 +26,18 @@ const CadastroEvento = ({navigation}) => {
   const createEvento = async () => {
     if (nomeEvento && descricaoEvento && valorEvento && dataLista) {
       try {
-        // const response = await api.post('/novasTarefas', { "nome": nomeLista, "descricao": descricaoLista, "data": dataLista });
-        // console.log(JSON.stringify(response.data));
-        console.log(nomeEvento);
-        console.log(descricaoEvento);
-        console.log(valorEvento);
-        console.log(dataLista);
-        console.log(idExemplo);
+        const response = await api.post('/concerts',
+          {
+            "name": nomeEvento,
+            "description": descricaoEvento,
+            "date": dataEvento,
+            "ticketPrice": valorEvento
+          });
+        console.log("concert created successfully!!")
+        console.log(JSON.stringify(response.data));
+
       } catch (error) {
-        console.log('DEU RUIM' + error);
+        console.log('Impossible to create concerts ' + error);
       }
     } else {
       console.log('Vazio');
@@ -174,7 +179,7 @@ const css = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     elevation: 9.5,
   },
-  tittle: {
+  title: {
     textAlign: 'center',
     marginTop: 5,
     fontFamily: 'Nunito-Bold',
