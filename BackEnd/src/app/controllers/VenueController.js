@@ -1,10 +1,10 @@
-import User from '../models/User';
+import Venue from '../models/Venue';
 
-class UserController {
+class VenueController {
     async store(req, res) {
 
         try {
-            const userExists = await User.findOne({ where: { email: req.body.email } });
+            const userExists = await Venue.findOne({ where: { email: req.body.email } });
             if (userExists) {
                 return res.status(400).json({ error: 'User already exists.' });
             }
@@ -71,4 +71,4 @@ class UserController {
 
 }
 
-export default new UserController();
+export default new VenueController();
