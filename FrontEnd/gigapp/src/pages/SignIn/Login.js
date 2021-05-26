@@ -15,7 +15,7 @@ import {
 import {signIn} from '../../services/auth';
 import {useAuth} from '../../contexts/auth';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const {signed, user, signIn} = useAuth();
 
   console.log(signed);
@@ -116,7 +116,7 @@ const Login = () => {
           autoCorrect={false}
         />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
           <Text style={css.cadastrar}>Cadastrar-se</Text>
         </TouchableOpacity>
 
