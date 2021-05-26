@@ -1,6 +1,5 @@
 import React from 'react';
 import {useAuth} from '../../contexts/auth';
-import {NavigationContainer, DrawerActions} from '@react-navigation/native';
 import {createDrawerNavigator, DrawerItemList} from '@react-navigation/drawer';
 import {
   StyleSheet,
@@ -13,14 +12,18 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Agenda from '../../pages/Dashboards/Agenda';
-import EditarPerfil from '../../pages/Dashboards/EditarPerfil';
+import EditarPerfil from '../../pages/Register/EditarPerfil';
 import Sobre from '../../pages/Dashboards/Sobre';
 import Tabs from './Tabs';
 
 const Drawer = createDrawerNavigator();
 
 function Drawers() {
-  const {user} = useAuth();
+  const {user, signOut} = useAuth();
+
+  async function handleSignOut() {
+    signOut();
+  }
 
   function Content({...props}) {
     function LogOut() {
@@ -31,10 +34,10 @@ function Drawers() {
         <View>
           <View>
             <View style={css.personLogo}>
-              {/* <Image
+              <Image
                 style={css.image}
-                source={require('../assets/fotos/dazaranha.jpg')}
-              /> */}
+                source={require('../../assets/fotos/dazaranha.jpg')}
+              />
               <View style={css.personDescription}>
                 <Text
                   multimultiline={true}
@@ -63,7 +66,7 @@ function Drawers() {
           <View style={{marginTop: 10}}>
             <DrawerItemList {...props} />
           </View>
-          <TouchableOpacity onPress={LogOut}>
+          <TouchableOpacity onPress={handleSignOut}>
             <View style={css.buttonSair}>
               <Icon name={'log-out'} size={28} color={'#FF7306'} />
               <Text style={css.buttonText}>Sair</Text>
@@ -77,16 +80,10 @@ function Drawers() {
         <View>
           <View>
             <View style={css.personLogo}>
-              {/* <Image
+              <Image
                 style={css.image}
-                source={require('../assets/fotos/chopp.jpg')}
-              /> */}
-              {/* <Icon
-                     name="person-circle"
-                     color={'#FF7306'}
-                     size={75}
-                     style={{marginLeft: 5}}
-                   /> */}
+                source={require('../../assets/fotos/chopp.jpg')}
+              />
               <View style={css.personDescription}>
                 <Text
                   multimultiline={true}
@@ -115,7 +112,7 @@ function Drawers() {
           <View style={{marginTop: 10}}>
             <DrawerItemList {...props} />
           </View>
-          <TouchableOpacity onPress={LogOut}>
+          <TouchableOpacity onPress={handleSignOut}>
             <View style={css.buttonSair}>
               <Icon name={'log-out'} size={28} color={'#FF7306'} />
               <Text style={css.buttonText}>Sair</Text>

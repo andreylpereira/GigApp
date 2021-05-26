@@ -5,11 +5,7 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {useAuth} from '../../contexts/auth';
 
 const Home = () => {
-  const {user, signOut} = useAuth();
-
-  async function handleSignOut() {
-    signOut();
-  }
+  const {user} = useAuth();
 
   const mapLightStyle = [
     {
@@ -295,26 +291,7 @@ const Home = () => {
 
   return (
     <>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignSelf: 'center',
-          width: '50%',
-          marginBottom: 100
-        }}>
-        <Text
-          style={{
-            marginBottom: 10,
-            fontSize: 15,
-            fontWeight: 'bold',
-            justifyContent: 'center',
-            alignSelf: 'center',
-          }}>
-          {user?.name}
-        </Text>
-        <Button title="Sair" onPress={handleSignOut} />
-      </View>
+      <StatusBar barStyle="dark-content" hidden={true} />
       <View style={css.container}>
         <View style={css.containerMap}>
           <MapView
@@ -332,7 +309,7 @@ const Home = () => {
                 latitude: -27.600711,
                 longitude: -48.501234,
               }}
-              // image={require('../assets/maps/drink.png')}
+              image={require('../../assets/maps/drink.png')}
               title="teste"
               description="Teste">
               <MapView.Callout tooltip>
@@ -364,11 +341,11 @@ const Home = () => {
                             marginRight: -15,
                             borderRadius: 15,
                           }}>
-                          {/* <Image
+                          <Image
                             style={css.image}
                             resizeMode="cover"
-                            source={require('../assets/fotos/underdogs.jpg')}
-                          /> */}
+                            source={require('../../assets/fotos/underdogs.jpg')}
+                          />
                         </Text>
 
                         <View style={css.gridColunm}>
@@ -383,6 +360,79 @@ const Home = () => {
                           </Text>
                         </View>
                       </View>
+                      {/* <View style={(css.gridRow, {alignSelf: 'center'})}>
+                          <Text style={css.mapTextDetails} onPress={() => navigation.navigate('Perfil')}>Ver mais</Text>
+
+                                  <View style={(css.gridRow, {alignSelf: 'center'})}>
+                      </View> */}
+                    </View>
+                  </View>
+                  <View style={css.arrowBorder} />
+                  <View style={css.arrow} />
+                </View>
+              </MapView.Callout>
+            </MapView.Marker>
+            <MapView.Marker
+              coordinate={{
+                latitude: -27.601728,
+                longitude: -48.525906,
+              }}
+              image={require('../../assets/maps/band.png')}
+              title="teste"
+              description="Teste">
+              <MapView.Callout tooltip>
+                <View>
+                  <View style={css.bubble}>
+                    <View style={css.gridColunm}>
+                      <View style={{alignSelf: 'center', marginBottom: 5}}>
+                        <View style={css.gridRow}>
+                          <Text style={css.mapTextTittle}>Dazaranha</Text>
+                          <Text style={css.note}>10,0</Text>
+                          <Icon
+                            name="star"
+                            color={'#FCC51C'}
+                            size={12.5}
+                            style={{
+                              opacity: 0.5,
+                              paddingTop: 3,
+                              paddingLeft: 1,
+                            }}
+                          />
+                        </View>
+                      </View>
+                      <View style={css.gridRow}>
+                        <Text
+                          style={{
+                            height: 90,
+                            width: 80,
+                            marginTop: -20,
+                            marginRight: -15,
+                            borderRadius: 15,
+                          }}>
+                          <Image
+                            style={css.image}
+                            resizeMode="cover"
+                            source={require('../../assets/fotos/redlights.jpg')}
+                          />
+                        </Text>
+
+                        <View style={css.gridColunm}>
+                          <Text
+                            multimultiline={true}
+                            style={css.mapTextDescription}>
+                            Banda Catarinense que é convidada pra todo santo
+                            show que fazem na cidade.
+                          </Text>
+                          <Text multimultiline={true} style={css.mapTextPhone}>
+                            Tel: 99482-0120
+                          </Text>
+                        </View>
+                      </View>
+                      {/* <View style={(css.gridRow, {alignSelf: 'center'})}>
+                          <Text style={css.mapTextDetails} onPress={() => navigation.navigate('Perfil')}>Ver mais</Text>
+
+                                  <View style={(css.gridRow, {alignSelf: 'center'})}>
+                      </View> */}
                     </View>
                   </View>
                   <View style={css.arrowBorder} />
@@ -402,11 +452,11 @@ const css = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '70%',
+    height: '100%',
   },
   containerMap: {
     // height: 300,
-    height: '95%',
+    height: '85%',
     width: '95%',
     borderWidth: 5,
     elevation: 9.5,

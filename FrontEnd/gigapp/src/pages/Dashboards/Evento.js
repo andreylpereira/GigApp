@@ -106,7 +106,7 @@ const Evento = ({navigation}) => {
             <View style={css.buttons}>
               <TouchableOpacity
                 style={css.button}
-                onPress={() => navigation.navigate('CadastroEstabelecimento')}>
+                onPress={() => navigation.navigate('SelecaoBanda')}>
                 <Text style={css.buttonText}>Candidatar-se</Text>
               </TouchableOpacity>
               <TouchableOpacity

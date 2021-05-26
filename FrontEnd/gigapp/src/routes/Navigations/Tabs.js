@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../../pages/Dashboards/Home';
 import Evento from '../../pages/Dashboards/Evento';
-import CadastroEvento from '../../pages/Dashboards/CadastroEvento';
+import CadastroEvento from '../../pages/Register/CadastroEvento';
 
 const Tab = createBottomTabNavigator();
 
