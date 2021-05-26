@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {useAuth} from '../../contexts/auth';
 
-const Dashboard = () => {
+const Home = () => {
   const {user, signOut} = useAuth();
 
   async function handleSignOut() {
@@ -514,4 +514,4 @@ const css = StyleSheet.create({
   },
 });
 
-export default Dashboard;
+export default Home;
