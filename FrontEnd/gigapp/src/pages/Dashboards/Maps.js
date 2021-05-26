@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import {useAuth} from '../../contexts/auth';
+import {useAuth} from '../../context/auth';
 
 const Maps = ({navigation}) => {
   const mapLightStyle = [

@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {StatusBar, View, Text, StyleSheet} from 'react-native';
-import {AuthProvider} from './contexts/auth';
+import {AuthProvider} from './context/auth';
 
 import Routes from './routes/index';
 

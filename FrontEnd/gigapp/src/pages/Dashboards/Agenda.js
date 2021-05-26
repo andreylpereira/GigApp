@@ -1,7 +1,7 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useAuth} from '../../contexts/auth';
+import {useAuth} from '../../context/auth';
 
 import {
   StyleSheet,
@@ -58,19 +58,6 @@ const Agenda = ({navigation}) => {
     const EventoBanda = ({item}) => {
       return (
         <View>
-          {/* <View style={css.icons}>
-              <View style={css.iconEdit}>
-                <Icon
-                  name={'pencil-outline'}
-                  size={16}
-                  color={'#FF6400'}
-                  onPress={() => navigation.navigate('EditarEvento')}
-                />
-              </View>
-              <View style={css.iconDelete}>
-                <Icon name={'trash-bin'} size={16} color={'#FF6400'} />
-              </View>
-            </View> */}
           <View style={css.card}>
             <View style={css.content}>
               <View style={css.rows}>
@@ -242,7 +229,7 @@ const Agenda = ({navigation}) => {
 
 const css = StyleSheet.create({
   container: {
-    marginTop: 100, //retirar
+    marginTop: 100,
     width: '100%',
     height: '100%',
   },

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {StyleSheet, View, ActivityIndicator} from 'react-native';
-import {useAuth} from '../../contexts/auth';
+import {useAuth} from '../../context/auth';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../../pages/Dashboards/Home';

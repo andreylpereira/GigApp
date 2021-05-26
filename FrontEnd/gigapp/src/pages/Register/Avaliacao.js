@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useAuth} from '../../contexts/auth';
+import {useAuth} from '../../context/auth';
 import {Picker} from '@react-native-picker/picker';
 
 import {
