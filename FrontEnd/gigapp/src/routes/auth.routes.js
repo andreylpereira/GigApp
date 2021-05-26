@@ -1,5 +1,5 @@
 import React from 'react';
-import SignIn from '../pages/SignIn/signin';
+import Login from '../pages/SignIn/Login';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -7,7 +7,9 @@ const AuthStack = createStackNavigator();
 
 const AuthRoutes = () => (
     <AuthStack.Navigator>
-        <AuthStack.Screen name="SignIn" component={SignIn}/>
+        <AuthStack.Screen name="Login" component={Login} options={{
+          headerShown: false,
+        }}/>
     </AuthStack.Navigator>
 )
 
