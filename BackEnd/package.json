@@ -1,0 +1,35 @@
+{
+  "name": "gig-api-backend",
+  "version": "1.0.1",
+  "description": "",
+  "main": "nodemon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "dev": "nodemon src/server",
+    "dev:debug": "nodemon --inspect src/server",
+    "server": "node ./server.js",
+    "poststatus": "service postgresql status",
+    "swagger-autogen": "node ./src/swagger.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "sucrase": "^3.18.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0",
+    "swagger-autogen": "^2.8.2",
+    "swagger-ui-express": "^4.1.6",
+    "yarn": "^1.22.10",
+    "yup": "^0.32.9"
+  }
+}
