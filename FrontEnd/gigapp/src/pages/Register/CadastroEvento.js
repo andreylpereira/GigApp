@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import DatePicker from 'react-native-datepicker';
-import api from '../services/axios';
+import api from '../../services/api';
 
 const CadastroEvento = ({ navigation }) => {
 
@@ -20,11 +20,11 @@ const CadastroEvento = ({ navigation }) => {
   const [descricaoEvento, setDescricaoEvento] = useState('');
   const [valorEvento, setValorEvento] = useState('');
   const [dataInicial, setDataInicial] = useState(new Date());
-  const dataLista = dataInicial;
+  const dataEvento = dataInicial;
 
   //fazer validações
   const createEvento = async () => {
-    if (nomeEvento && descricaoEvento && valorEvento && dataLista) {
+    if (nomeEvento && descricaoEvento && valorEvento && dataEvento) {
       try {
         const response = await api.post('/concerts',
           {
