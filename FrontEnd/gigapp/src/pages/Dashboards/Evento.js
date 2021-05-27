@@ -170,6 +170,10 @@ const Evento = ({ navigation }) => {
                 </Text>
               </View>
               <View style={css.rows}>
+                <Text style={css.label}>Entrada: </Text>
+                <Text style={css.tittle}>{item.ticketPrice}</Text>
+              </View>
+              <View style={css.rows}>
                 <Text style={css.label}>Bandas: </Text>
                 <Text
                   multimultiline={true}
@@ -260,6 +264,10 @@ const Evento = ({ navigation }) => {
                   numberOfLines={2}>
                   {item.description}
                 </Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Entrada: </Text>
+                <Text style={css.tittle}>{item.ticketPrice}</Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Bandas: </Text>
