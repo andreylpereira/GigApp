@@ -108,7 +108,7 @@ const css = StyleSheet.create({
     borderRadius: 7.5,
   },
   content: {
-    padding: 10,
+    padding: 15,
     paddingBottom: 0,
   },
   tittle: {
@@ -117,21 +117,12 @@ const css = StyleSheet.create({
     color: '#131313',
     textAlign: 'center',
     fontSize: 15,
-    paddingRight: 10,
   },
   subtittle: {
     fontFamily: 'Nunito-Black',
-    color: '#ccc',
+    color: '#A1A1A1',
     textAlign: 'center',
-    fontSize: 13,
-    paddingRight: 10,
-  },
-  notes: {
-    fontFamily: 'Nunito-Regular',
-    color: '#ccc',
-    textAlign: 'center',
-    fontSize: 10,
-    paddingRight: 10,
+    fontSize: 12,
   },
   button: {
     borderWidth: 2,
@@ -153,7 +144,6 @@ const css = StyleSheet.create({
   },
   buttons: {
     alignSelf: 'center',
-    marginTop: 5,
     marginBottom: 5,
     display: 'flex',
     justifyContent: 'space-between',
@@ -177,7 +167,7 @@ const css = StyleSheet.create({
   },
   starLineText: {
     textAlign: 'center',
-    color: '#cccccc',
+    color: '#A1A1A1',
     fontSize: 11,
     fontFamily: 'Nunito-Regular',
   },
@@ -203,8 +193,7 @@ const css = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 15,
-    marginRight: 10,
-  },
+  }
 });
 
 export default AvaliacaoBanda;

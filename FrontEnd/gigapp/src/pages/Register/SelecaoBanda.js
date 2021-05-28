@@ -120,15 +120,9 @@ const css = StyleSheet.create({
   },
   subtittle: {
     fontFamily: 'Nunito-Black',
-    color: '#ccc',
+    color: '#A1A1A1',
     textAlign: 'center',
-    fontSize: 13,
-  },
-  notes: {
-    fontFamily: 'Nunito-Regular',
-    color: '#ccc',
-    textAlign: 'center',
-    fontSize: 10,
+    fontSize: 12,
   },
   button: {
     borderWidth: 2,
@@ -173,7 +167,7 @@ const css = StyleSheet.create({
   },
   starLineText: {
     textAlign: 'center',
-    color: '#cccccc',
+    color: '#A1A1A1',
     fontSize: 11,
     fontFamily: 'Nunito-Regular',
   },
