@@ -4,7 +4,7 @@ import {FlatList} from 'react-native';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const SelecaoBanda = ({navigation}) => {
+const AvaliacaoBanda = ({navigation}) => {
   const eventos_mock = [
     {
       id: 1,
@@ -38,7 +38,7 @@ const SelecaoBanda = ({navigation}) => {
 
   const {user} = useAuth();
 
-  const SelecionarBanda = ({item}) => {
+  const AvaliarBanda = ({item}) => {
     return (
       <View>
         <View style={css.card}>
@@ -77,7 +77,7 @@ const SelecaoBanda = ({navigation}) => {
             <TouchableOpacity
               style={css.button}
               onPress={() => navigation.navigate('Avaliacao')}>
-              <Text style={css.buttonText}>Selecionar</Text>
+              <Text style={css.buttonText}>Avaliar</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -90,7 +90,7 @@ const SelecaoBanda = ({navigation}) => {
         <FlatList
           removeClippedSubviews={false}
           data={eventos_mock}
-          renderItem={SelecionarBanda}
+          renderItem={AvaliarBanda}
           keyExtractor={item => item.id}></FlatList>
       </View>
     </View>
@@ -108,7 +108,7 @@ const css = StyleSheet.create({
     borderRadius: 7.5,
   },
   content: {
-    padding: 15,
+    padding: 10,
     paddingBottom: 0,
   },
   tittle: {
@@ -117,18 +117,21 @@ const css = StyleSheet.create({
     color: '#131313',
     textAlign: 'center',
     fontSize: 15,
+    paddingRight: 10,
   },
   subtittle: {
     fontFamily: 'Nunito-Black',
     color: '#ccc',
     textAlign: 'center',
     fontSize: 13,
+    paddingRight: 10,
   },
   notes: {
     fontFamily: 'Nunito-Regular',
     color: '#ccc',
     textAlign: 'center',
     fontSize: 10,
+    paddingRight: 10,
   },
   button: {
     borderWidth: 2,
@@ -150,6 +153,7 @@ const css = StyleSheet.create({
   },
   buttons: {
     alignSelf: 'center',
+    marginTop: 5,
     marginBottom: 5,
     display: 'flex',
     justifyContent: 'space-between',
@@ -199,7 +203,8 @@ const css = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 15,
+    marginRight: 10,
   },
 });
 
-export default SelecaoBanda;
+export default AvaliacaoBanda;

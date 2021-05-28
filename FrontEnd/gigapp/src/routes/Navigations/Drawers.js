@@ -29,7 +29,7 @@ function Drawers() {
     function LogOut() {
       props.navigation.navigate('Login');
     }
-    if (user.perfil == 'banda') {
+    if (!user.provider) {
       return (
         <View>
           <View>
@@ -75,7 +75,7 @@ function Drawers() {
         </View>
       );
     }
-    if (user.perfil == 'estabelecimento') {
+    if (user.provider) {
       return (
         <View>
           <View>
@@ -161,7 +161,7 @@ function Drawers() {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Agenda"
         component={Agenda}
         options={{
@@ -174,7 +174,7 @@ function Drawers() {
             />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="Editar Perfil"
         component={EditarPerfil}
