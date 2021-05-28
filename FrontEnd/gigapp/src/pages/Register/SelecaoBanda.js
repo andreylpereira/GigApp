@@ -45,14 +45,14 @@ const SelecaoBanda = ({navigation}) => {
           <View>
             <View style={css.content}>
               <View>
-                <View style={({alignSelf: 'center'})}>
+                <View style={{alignSelf: 'center'}}>
                   <Image
                     style={css.image}
                     resizeMode="cover"
                     source={require('../../assets/fotos/redlights.jpg')}
                   />
                 </View>
-                <View style={{alignSelf:'center'}}>
+                <View style={{alignSelf: 'center'}}>
                   <Text style={css.tittle}>{item.nome}</Text>
                   <Text
                     multimultiline={true}
@@ -117,21 +117,18 @@ const css = StyleSheet.create({
     color: '#131313',
     textAlign: 'center',
     fontSize: 15,
-
   },
   subtittle: {
     fontFamily: 'Nunito-Black',
     color: '#ccc',
     textAlign: 'center',
     fontSize: 13,
- 
   },
   notes: {
     fontFamily: 'Nunito-Regular',
     color: '#ccc',
     textAlign: 'center',
     fontSize: 10,
- 
   },
   button: {
     borderWidth: 2,
