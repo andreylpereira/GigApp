@@ -170,11 +170,11 @@ const Evento = ({navigation}) => {
               </View>
             </View>
             <View style={css.buttons}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={css.button}
                 onPress={() => navigation.navigate('SelecaoBanda')}>
                 <Text style={css.buttonText}>Candidatar-se</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
                 style={css.button}
                 onPress={() => navigation.navigate('Avaliacao')}>
@@ -187,7 +187,7 @@ const Evento = ({navigation}) => {
     };
     return (
       <View style={css.containerList}>
-        <Text style={css.title}>Eventos</Text>
+        <Text style={css.title}>Seus eventos</Text>
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
@@ -269,7 +269,7 @@ const Evento = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={css.button}
-                onPress={() => navigation.navigate('Avaliacao')}>
+                onPress={() => navigation.navigate('AvaliacaoBanda')}>
                 <Text style={css.buttonText}>Avaliar bandas</Text>
               </TouchableOpacity>
             </View>
@@ -279,7 +279,7 @@ const Evento = ({navigation}) => {
     };
     return (
       <View style={css.containerList}>
-        <Text style={css.title}>Eventos</Text>
+        <Text style={css.title}>Seus eventos</Text>
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
@@ -358,7 +358,9 @@ const css = StyleSheet.create({
     fontFamily: 'Nunito-Black',
   },
   buttons: {
+    alignSelf: 'center',
     marginTop: 5,
+    marginBottom: 5,
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'row',

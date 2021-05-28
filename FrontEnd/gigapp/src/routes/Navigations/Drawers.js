@@ -161,7 +161,7 @@ function Drawers() {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Agenda"
         component={Agenda}
         options={{
@@ -174,7 +174,7 @@ function Drawers() {
             />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="Editar Perfil"
         component={EditarPerfil}

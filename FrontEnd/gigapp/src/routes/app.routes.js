@@ -5,11 +5,14 @@ import {DrawerActions} from '@react-navigation/native';
 
 import Drawers from './Navigations/Drawers';
 import Avaliacao from '../pages/Register/Avaliacao';
+import AvaliacaoBanda from '../pages/Register/AvaliacaoBanda';
 import SelecaoBanda from '../pages/Register/SelecaoBanda';
 import EditarEvento from '../pages/Register/EditarEvento';
 import Maps from '../pages/Dashboards/Maps';
 
+
 import {createStackNavigator} from '@react-navigation/stack';
+
 
 const AppStack = createStackNavigator();
 
@@ -65,6 +68,21 @@ const AppRoutes = () => (
       component={Avaliacao}
       options={{
         title: 'Avaliação',
+        headerTitleStyle: {fontFamily: 'Nunito-Bold'},
+        headerTitleAlign: 'center',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: '#FF7306',
+          borderBottomWidth: 1,
+          borderBottomColor: '#CDCCCE',
+        },
+      }}
+    />
+        <AppStack.Screen
+      name="AvaliacaoBanda"
+      component={AvaliacaoBanda}
+      options={{
+        title: 'Avaliação de Bandas',
         headerTitleStyle: {fontFamily: 'Nunito-Bold'},
         headerTitleAlign: 'center',
         headerTintColor: 'white',
