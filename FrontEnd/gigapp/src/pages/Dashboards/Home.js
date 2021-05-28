@@ -1,294 +1,16 @@
-import React from 'react';
-import {StatusBar, StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
+import React, {useState} from 'react';
+import {StatusBar, StyleSheet, Text, View,  TouchableOpacity, ActivityIndicator} from 'react-native';
+import {FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {useAuth} from '../../context/auth';
 
 const Home = () => {
   const {user} = useAuth();
   console.log(user);
 
-  const mapLightStyle = [
-    {
-      featureType: 'administrative',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#d6e2e6',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative',
-      elementType: 'geometry.stroke',
-      stylers: [
-        {
-          color: '#cfd4d5',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#1C1C1C',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.neighborhood',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          lightness: 100,
-        },
-      ],
-    },
-    {
-      featureType: 'landscape.man_made',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#E6ECED',
-        },
-      ],
-    },
-    {
-      featureType: 'landscape.man_made',
-      elementType: 'geometry.stroke',
-      stylers: [
-        {
-          color: '#cfd4d5',
-        },
-      ],
-    },
-    {
-      featureType: 'landscape.natural',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#E6ECED',
-        },
-      ],
-    },
-    {
-      featureType: 'landscape.natural',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#1C1C1C',
-        },
-      ],
-    },
-    {
-      featureType: 'landscape.natural.terrain',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#E6ECED',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          saturation: -100,
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#588ca4',
-          //"color": "#B5B5B5"
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#a9de83',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry.stroke',
-      stylers: [
-        {
-          color: '#bae6a1',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.sports_complex',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#c6e8b3',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.sports_complex',
-      elementType: 'geometry.stroke',
-      stylers: [
-        {
-          color: '#bae6a1',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          saturation: -45,
-        },
-        {
-          lightness: 10,
-        },
-        {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#1C1C1C',
-        },
-      ],
-    },
-    {
-      featureType: 'road.arterial',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#ffffff',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#B2BCFF',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry.stroke',
-      stylers: [
-        {
-          color: '#A6AFED',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway.controlled_access',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#9fb6bd',
-        },
-      ],
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#ffffff',
-        },
-      ],
-    },
-    {
-      featureType: 'transit',
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          saturation: -70,
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#939294',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#939294',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#008cb5',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station.airport',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          saturation: -100,
-        },
-        {
-          lightness: -5,
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry.fill',
-      stylers: [
-        {
-          color: '#a6cbe3',
-        },
-      ],
-    },
-  ];
+
+const Home = ({navigation}) => {
+
 
   if (user.provider) {
     return (
@@ -350,35 +72,64 @@ const Home = () => {
                             />
                           </Text>
 
-                          <View style={css.gridColunm}>
-                            <Text
-                              multimultiline={true}
-                              style={css.mapTextDescription}>
-                              Banda Catarinense que é convidada pra todo santo
-                              show que fazem na cidade.
-                            </Text>
-                            <Text
-                              multimultiline={true}
-                              style={css.mapTextPhone}>
-                              Tel: 99482-0120
-                            </Text>
-                          </View>
-                        </View>
-                        {/* <View style={(css.gridRow, {alignSelf: 'center'})}>
-                          <Text style={css.mapTextDetails} onPress={() => navigation.navigate('Perfil')}>Ver mais</Text>
+const eventos_mock = [
+  {
+    id: 1,
+    titulo: 'Show do Daza',
+    estabelecimento: 'John Bull',
+    data: '24/10/1950',
+    descricao: 'das dasd asd',
+    banda1: 'faf a2',
+    banda2: 'd gsgs',
+  },
+  {
+    id: 2,
+    titulo: '142131 asda',
+    estabelecimento: ' asd22',
+    data: '25/10/1950',
+    descricao: ' gdfgdf',
+    banda1: ' dfgd2',
+    banda2: ' sdasd',
+  },
+  {
+    id: 3,
+    titulo: 'Teste2',
+    estabelecimento: 'Celulsdfsda',
+    data: '26/10/1950',
+    descricao: 'Último shsdfsdfsdw do Strokes nessa bagaça teste',
+    banda1: 'Strokdsfsdfes',
+    banda2: 'AfdsfsdfM',
+  },
+  {
+    id: 4,
+    titulo: 'teste4',
+    estabelecimento: 'Celula',
+    data: '27/10/1950',
+    descricao: 'Úgfgfça',
+    banda1: 'Stroke331s',
+    banda2: 'AM2131',
+  },
+];
 
-                                  <View style={(css.gridRow, {alignSelf: 'center'})}>
-                      </View> */}
-                      </View>
-                    </View>
-                    <View style={css.arrowBorder} />
-                    <View style={css.arrow} />
-                  </View>
-                </MapView.Callout>
-              </MapView.Marker>
-            </MapView>
+
+const [eventos, setEventos] = useState(eventos_mock);
+const {user} = useAuth();
+
+if (!user.provider) {
+  const EventoBanda = ({item}) => {
+    return (
+      <View>
+        <View style={css.icons}>
+        <View style={css.iconMaps2}>
+            <Icon
+              name={'locate'}
+              size={16}
+              color={'#FF6400'}
+              onPress={() => navigation.navigate('Maps')}
+            />
           </View>
         </View>
+
       </>
     );
   }
@@ -469,133 +220,305 @@ const Home = () => {
                 </MapView.Callout>
               </MapView.Marker>
             </MapView>
+
+        <View style={css.card}>
+          <View style={css.content}>
+            <View style={css.rows}>
+              <Text style={css.label}>Evento: </Text>
+              <Text style={css.tittle}>{item.titulo}</Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Estabelecimento: </Text>
+              <Text
+                multimultiline={true}
+                numberOfLines={2}
+                style={css.tittle}>
+                {item.estabelecimento}
+              </Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Data: </Text>
+              <Text style={css.description}>{item.data}</Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Descrição: </Text>
+              <Text
+                style={css.description}
+                multimultiline={true}
+                numberOfLines={2}>
+                {item.descricao}
+              </Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Bandas: </Text>
+              <Text
+                multimultiline={true}
+                numberOfLines={2}
+                style={css.description}>
+                {item.banda1}, {item.banda2}
+              </Text>
+            </View>
+          </View>
+          <View style={css.buttons}>
+            <TouchableOpacity
+              style={css.button}
+              onPress={() => navigation.navigate('SelecaoBanda')}>
+              <Text style={css.buttonText}>Candidatar-se</Text>
+            </TouchableOpacity>
+            {/* <TouchableOpacity
+              style={css.button}
+              onPress={() => navigation.navigate('Avaliacao')}>
+              <Text style={css.buttonText}>Avaliar</Text>
+            </TouchableOpacity> */}
+
           </View>
         </View>
-      </>
+      </View>
     );
-  } else {
+  };
+  return (
+    <View style={css.containerList}>
+      <Text style={css.title}>Eventos disponíveis</Text>
+      <View style={css.scroll}>
+        <FlatList
+          removeClippedSubviews={false}
+          data={eventos_mock}
+          renderItem={EventoBanda}
+          keyExtractor={item => item.id}></FlatList>
+      </View>
+    </View>
+  );
+}
+if (user.provider) {
+  const EventoEstabelecimento = ({item}) => {
     return (
       <View>
-      <View style={css.error}><ActivityIndicator size="large" color="#FF7306" /></View>
-    </View>
+        <View style={css.icons}>
+        <View style={css.iconMaps2}>
+            <Icon
+              name={'locate'}
+              size={16}
+              color={'#FF6400'}
+              onPress={() => navigation.navigate('Maps')}
+            />
+          </View>
+        </View>
+        <View style={css.card}>
+          <View style={css.content}>
+            <View style={css.rows}>
+              <Text style={css.label}>Evento: </Text>
+              <Text style={css.tittle}>{item.titulo}</Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Estabelecimento: </Text>
+              <Text
+                multimultiline={true}
+                numberOfLines={2}
+                style={css.tittle}>
+                {item.estabelecimento}
+              </Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Data: </Text>
+              <Text style={css.description}>{item.data}</Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Descrição: </Text>
+              <Text
+                style={css.description}
+                multimultiline={true}
+                numberOfLines={2}>
+                {item.descricao}
+              </Text>
+            </View>
+            <View style={css.rows}>
+              <Text style={css.label}>Bandas: </Text>
+              <Text
+                multimultiline={true}
+                numberOfLines={2}
+                style={css.description}>
+                {item.banda1}, {item.banda2}
+              </Text>
+            </View>
+          </View>
+          <View style={css.buttons}>
+            {/* <TouchableOpacity
+              style={css.button}
+              onPress={() => navigation.navigate('SelecaoBanda')}>
+              <Text style={css.buttonText}>Selecionar bandas</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={css.button}
+              onPress={() => navigation.navigate('Avaliacao')}>
+              <Text style={css.buttonText}>Avaliar bandas</Text>
+            </TouchableOpacity>*/}
+          </View> 
+        </View>
+      </View>
     );
-  }
+  };
+  return (
+    <View style={css.containerList}>
+      <Text style={css.title}>Eventos disponíveis</Text>
+      <View style={css.scroll}>
+        <FlatList
+          removeClippedSubviews={false}
+          data={eventos_mock}
+          renderItem={EventoEstabelecimento}
+          keyExtractor={item => item.id}></FlatList>
+      </View>
+    </View>
+  );
+} else {
+  return (
+    <View>
+      <View style={css.error}>
+        <ActivityIndicator size="large" color="#FF7306" />
+      </View>
+    </View>
+  );
+}
 };
 
 const css = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 100,
     width: '100%',
     height: '100%',
   },
-  containerMap: {
-    // height: 300,
-    height: '85%',
-    width: '95%',
-    borderWidth: 5,
-    elevation: 9.5,
-    borderRadius: 7.5,
-    borderColor: '#FFF',
-    backgroundColor: '#131313',
+  title: {
+    textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 10,
+    fontFamily: 'Nunito-Bold',
+    fontSize: 21,
+    elevation: 7.5,
   },
   card: {
     alignSelf: 'center',
     backgroundColor: '#fff',
+    marginTop: 10,
     marginBottom: 15,
-    width: '95%',
+    width: '90%',
+    elevation: 7.5,
+    borderRadius: 7.5,
+  },
+  content: {
     padding: 10,
-    elevation: 9.5,
-    borderRadius: 7.5,
-    textAlign: 'left',
+    paddingBottom: 0,
   },
-  avatar: {
-    display: 'flex',
-    flexDirection: 'column',
-    borderWidth: 1,
-    borderRadius: 7.5,
-    borderColor: '#ccc',
-    width: 70,
-    height: 70,
-    alignSelf: 'center',
-    marginBottom: 50,
+  label: {
+    fontFamily: 'Nunito-Black',
+    paddingRight: 5,
   },
-  image: {
-    width: 60,
-    height: 60,
-  },
-  text: {
+  tittle: {
     fontFamily: 'Nunito-Regular',
-    fontSize: 15,
+    paddingRight: 65,
   },
-  map: {
-    ...StyleSheet.absoluteFillObject,
+  description: {
+    fontFamily: 'Nunito-Regular',
+    paddingRight: 65,
   },
-  bubble: {
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
-    backgroundColor: '#fff',
-    borderRadius: 6,
-    borderColor: '#ccc',
-    borderWidth: 0.5,
-    padding: 10,
+  button: {
+    borderWidth: 2,
+    borderRadius: 21,
+    borderColor: '#FF7306',
+    width: '40%',
+    height: 25,
+    backgroundColor: '#FF6400',
+    alignSelf: 'center',
+    margin: 10,
+    marginTop: 2.5,
+    elevation: 5,
   },
-  mapTextTittle: {
-    fontSize: 15,
-    fontFamily: 'Nunito-Bold',
+  buttonText: {
     textAlign: 'center',
-    paddingLeft: 5,
-  },
-  mapTextDescription: {
+    color: 'white',
     fontSize: 13,
-    width: 175,
-    fontFamily: 'Nunito-Regular',
-    paddingLeft: 5,
+    fontFamily: 'Nunito-Black',
   },
-  mapTextPhone: {
-    fontSize: 13,
-    width: 175,
-    fontFamily: 'Nunito-Regular',
-    paddingLeft: 5,
-  },
-  // mapTextDetails: {
-  //   fontSize: 12,
-  //   fontFamily: 'Nunito-Italic',
-  //   color: '#007a87',
-  //   textAlign: 'center',
-  //   paddingLeft: 7.5,
-  //   marginTop: 5,
-  // },
-  note: {
-    color: '#CDCCCE',
-    fontSize: 11,
-    fontFamily: 'Nunito-Regular',
-    paddingLeft: 5,
-    paddingTop: 4,
-  },
-  arrow: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#fff',
-    borderWidth: 16,
+  buttons: {
     alignSelf: 'center',
-    marginTop: -32,
-  },
-  arrowBorder: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderTopColor: '#007a87',
-    borderWidth: 16,
-    alignSelf: 'center',
-    marginTop: -0.5,
-  },
-  gridColunm: {
+    marginTop: 5,
+    marginBottom: 5,
     display: 'flex',
-    flexDirection: 'column',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
-  gridRow: {
+  icons: {
     display: 'flex',
     flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginTop: 5,
+  },
+  iconMaps: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 4.5,
+    padding: 4,
+    paddingLeft: 4,
+    elevation: 7.5,
+    marginRight: '1%',
+  },
+  iconMaps2: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 4.5,
+    padding: 4,
+    paddingLeft: 4,
+    elevation: 7.5,
+    marginRight: '5%',
+  },
+  iconEdit: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 4.5,
+    padding: 2.5,
+    paddingLeft: 4,
+    elevation: 7.5,
+    marginRight: '1%',
+  },
+  iconDelete: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 4.5,
+    padding: 2.5,
+    paddingLeft: 3,
+    paddingRight: 3,
+    elevation: 7.5,
+    marginRight: '5%',
+  },
+  rows: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  scroll: {
+    height: 460,
+    width: '97%',
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderRadius: 9.5,
+    borderColor: '#E1E1E1',
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  containerList: {
+    width: '100%',
+    height: '100%',
+  },
+  scroll: {
+    height: '90%',
+    width: '100%',
+  },
+  error: {
+    marginTop: '70%',
+    textAlign: 'center',
   },
 });
 

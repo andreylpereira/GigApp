@@ -139,10 +139,22 @@ const Evento = ({ navigation }) => {
   }, [])
   console.log(concerts)
 
-  if (user.perfil == 'banda') {
-    const EventoBanda = ({ item }) => {
+
+  if (!user.provider) {
+    const EventoBanda = ({item}) => {
+
       return (
         <View>
+          <View style={css.icons}>
+          <View style={css.iconMaps2}>
+              <Icon
+                name={'locate'}
+                size={16}
+                color={'#FF6400'}
+                onPress={() => navigation.navigate('Maps')}
+              />
+            </View>
+          </View>
           <View style={css.card}>
             <View style={css.content}>
               <View style={css.rows}>
@@ -186,11 +198,11 @@ const Evento = ({ navigation }) => {
               </View>
             </View>
             <View style={css.buttons}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={css.button}
                 onPress={() => navigation.navigate('SelecaoBanda')}>
                 <Text style={css.buttonText}>Candidatar-se</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <TouchableOpacity
                 style={css.button}
                 onPress={() => navigation.navigate('Avaliacao')}>
@@ -203,7 +215,7 @@ const Evento = ({ navigation }) => {
     };
     return (
       <View style={css.containerList}>
-        <Text style={css.title}>Eventos</Text>
+        <Text style={css.title}>Seus eventos</Text>
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
@@ -214,8 +226,10 @@ const Evento = ({ navigation }) => {
       </View>
     );
   }
-  if (user.perfil == 'estabelecimento') {
-    const EventoEstabelecimento = ({ item }) => {
+
+  if (user.provider) {
+    const EventoEstabelecimento = ({item}) => {
+
       return (
         <View>
           <View style={css.icons}>
@@ -289,7 +303,7 @@ const Evento = ({ navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={css.button}
-                onPress={() => navigation.navigate('Avaliacao')}>
+                onPress={() => navigation.navigate('AvaliacaoBanda')}>
                 <Text style={css.buttonText}>Avaliar bandas</Text>
               </TouchableOpacity>
             </View>
@@ -299,7 +313,7 @@ const Evento = ({ navigation }) => {
     };
     return (
       <View style={css.containerList}>
-        <Text style={css.title}>Eventos</Text>
+        <Text style={css.title}>Seus eventos</Text>
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
@@ -378,7 +392,9 @@ const css = StyleSheet.create({
     fontFamily: 'Nunito-Black',
   },
   buttons: {
+    alignSelf: 'center',
     marginTop: 5,
+    marginBottom: 5,
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -398,6 +414,16 @@ const css = StyleSheet.create({
     paddingLeft: 4,
     elevation: 7.5,
     marginRight: '1%',
+  },
+  iconMaps2: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 4.5,
+    padding: 4,
+    paddingLeft: 4,
+    elevation: 7.5,
+    marginRight: '5%',
   },
   iconEdit: {
     borderWidth: 1,

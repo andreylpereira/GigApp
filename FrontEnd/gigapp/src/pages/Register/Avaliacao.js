@@ -14,38 +14,6 @@ import {
 const Avaliacao = ({navigation}) => {
   const {user} = useAuth();
 
-  const [banda1] = useState([
-    'selecione a nota',
-    '10,00',
-    '9,00',
-    '8,00',
-    '7,00',
-    '6,00',
-    '5,00',
-    '4,00',
-    '3,00',
-    '2,00',
-    '1,00',
-    '0,00',
-  ]);
-  const [notaBanda1, setNotaBanda1] = useState([]);
-
-  const [banda2] = useState([
-    'selecione a nota',
-    '10,00',
-    '9,00',
-    '8,00',
-    '7,00',
-    '6,00',
-    '5,00',
-    '4,00',
-    '3,00',
-    '2,00',
-    '1,00',
-    '0,00',
-  ]);
-  const [notaBanda2, setNotaBanda2] = useState([]);
-
   const [evento] = useState([
     'selecione a nota',
     '10,00',
@@ -61,24 +29,6 @@ const Avaliacao = ({navigation}) => {
     '0,00',
   ]);
   const [notaEvento, setNotaEvento] = useState([]);
-
-  const avaliarBandas = async () => {
-    if (notaBanda1 && notaBanda2) {
-      try {
-        // const response = await api.post('/novasTarefas', { "nome": nomeLista, "descricao": descricaoLista, "data": dataLista });
-        // console.log(JSON.stringify(response.data));
-
-        console.log('Nota Banda 1:' + ' ' + notaBanda1);
-        console.log('Nota Banda 2:' + ' ' + notaBanda2);
-      } catch (error) {
-        console.log('DEU RUIM' + error);
-      }
-    } else {
-      console.log('Vazio');
-    }
-    Keyboard.dismiss();
-    navigation.goBack();
-  };
 
   const avaliarEvento = async () => {
     if (notaEvento) {
@@ -96,7 +46,7 @@ const Avaliacao = ({navigation}) => {
     navigation.goBack();
   };
 
-  if (user.perfil == 'banda') {
+  if(!user.provider) {
     return (
       <>
         <StatusBar barStyle="dark-content" hidden={true} />
@@ -106,9 +56,7 @@ const Avaliacao = ({navigation}) => {
             <Picker
               style={{marginTop: -15, fontSize: 15}}
               selectedValue={notaEvento}
-              onValueChange={(itemValue, itemIndex) =>
-                setNotaEvento(itemValue)
-              }>
+              onValueChange={(itemValue, itemIndex) => setNotaEvento(itemValue)}>
               {evento.map((itemValue, itemIndex) => {
                 return (
                   <Picker.Item
@@ -127,20 +75,19 @@ const Avaliacao = ({navigation}) => {
       </>
     );
   }
-  if (user.perfil == 'estabelecimento') {
+
+  if(user.provider) {
     return (
       <>
         <StatusBar barStyle="dark-content" hidden={true} />
         <View style={css.container}>
-          <Text style={css.tittle}>Avalie a banda nº 1</Text>
+          <Text style={css.tittle}>Avalie a banda</Text>
           <View style={css.input}>
             <Picker
               style={{marginTop: -15, fontSize: 15}}
-              selectedValue={banda1}
-              onValueChange={(itemValue, itemIndex) =>
-                setNotaBanda1(itemValue)
-              }>
-              {banda1.map((itemValue, itemIndex) => {
+              selectedValue={notaEvento}
+              onValueChange={(itemValue, itemIndex) => setNotaEvento(itemValue)}>
+              {evento.map((itemValue, itemIndex) => {
                 return (
                   <Picker.Item
                     label={itemValue}
@@ -151,37 +98,11 @@ const Avaliacao = ({navigation}) => {
               })}
             </Picker>
           </View>
-
-          <Text style={css.tittle}>Avalie a banda nº 2</Text>
-          <View style={css.input}>
-            <Picker
-              style={{marginTop: -15, fontSize: 15}}
-              selectedValue={notaBanda2}
-              onValueChange={(itemValue, itemIndex) =>
-                setNotaBanda2(itemValue)
-              }>
-              {banda2.map((itemValue, itemIndex) => {
-                return (
-                  <Picker.Item
-                    label={itemValue}
-                    value={itemValue}
-                    key={itemIndex}
-                  />
-                );
-              })}
-            </Picker>
-          </View>
-          <TouchableOpacity style={css.button} onPress={() => avaliarBandas()}>
+          <TouchableOpacity style={css.button} onPress={() => avaliarEvento()}>
             <Text style={css.buttonText}>Avaliar</Text>
           </TouchableOpacity>
         </View>
       </>
-    );
-  } else {
-    return (
-      <View>
-        <Text style={css.error}>Error ao carregar</Text>
-      </View>
     );
   }
 };
@@ -229,7 +150,7 @@ const css = StyleSheet.create({
   tittle: {
     fontFamily: 'Nunito-Black',
     fontSize: 18,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   error: {
     marginTop: '70%',

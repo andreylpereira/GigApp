@@ -15,7 +15,7 @@ import {
 const EditarPerfil = ({navigation}) => {
   const {user} = useAuth();
 
-  if (user.perfil == 'banda') {
+  if (!user.provider) {
     return (
       <KeyboardAvoidingView>
         <StatusBar barStyle="dark-content" hidden={true} />
@@ -67,7 +67,7 @@ const EditarPerfil = ({navigation}) => {
       </KeyboardAvoidingView>
     );
   }
-  if (user.perfil == 'estabelecimento') {
+  if (user.provider) {
     return (
       <View>
         <StatusBar barStyle="dark-content" hidden={true} />
