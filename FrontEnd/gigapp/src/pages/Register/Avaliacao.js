@@ -46,33 +46,65 @@ const Avaliacao = ({navigation}) => {
     navigation.goBack();
   };
 
-  return (
-    <>
-      <StatusBar barStyle="dark-content" hidden={true} />
-      <View style={css.container}>
-        <Text style={css.tittle}>Avalie o estabelecimento</Text>
-        <View style={css.input}>
-          <Picker
-            style={{marginTop: -15, fontSize: 15}}
-            selectedValue={notaEvento}
-            onValueChange={(itemValue, itemIndex) => setNotaEvento(itemValue)}>
-            {evento.map((itemValue, itemIndex) => {
-              return (
-                <Picker.Item
-                  label={itemValue}
-                  value={itemValue}
-                  key={itemIndex}
-                />
-              );
-            })}
-          </Picker>
+  if(!user.provider) {
+    return (
+      <>
+        <StatusBar barStyle="dark-content" hidden={true} />
+        <View style={css.container}>
+          <Text style={css.tittle}>Avalie o estabelecimento</Text>
+          <View style={css.input}>
+            <Picker
+              style={{marginTop: -15, fontSize: 15}}
+              selectedValue={notaEvento}
+              onValueChange={(itemValue, itemIndex) => setNotaEvento(itemValue)}>
+              {evento.map((itemValue, itemIndex) => {
+                return (
+                  <Picker.Item
+                    label={itemValue}
+                    value={itemValue}
+                    key={itemIndex}
+                  />
+                );
+              })}
+            </Picker>
+          </View>
+          <TouchableOpacity style={css.button} onPress={() => avaliarEvento()}>
+            <Text style={css.buttonText}>Avaliar</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={css.button} onPress={() => avaliarEvento()}>
-          <Text style={css.buttonText}>Avaliar</Text>
-        </TouchableOpacity>
-      </View>
-    </>
-  );
+      </>
+    );
+  }
+
+  if(user.provider) {
+    return (
+      <>
+        <StatusBar barStyle="dark-content" hidden={true} />
+        <View style={css.container}>
+          <Text style={css.tittle}>Avalie a banda</Text>
+          <View style={css.input}>
+            <Picker
+              style={{marginTop: -15, fontSize: 15}}
+              selectedValue={notaEvento}
+              onValueChange={(itemValue, itemIndex) => setNotaEvento(itemValue)}>
+              {evento.map((itemValue, itemIndex) => {
+                return (
+                  <Picker.Item
+                    label={itemValue}
+                    value={itemValue}
+                    key={itemIndex}
+                  />
+                );
+              })}
+            </Picker>
+          </View>
+          <TouchableOpacity style={css.button} onPress={() => avaliarEvento()}>
+            <Text style={css.buttonText}>Avaliar</Text>
+          </TouchableOpacity>
+        </View>
+      </>
+    );
+  }
 };
 
 const css = StyleSheet.create({
@@ -118,7 +150,7 @@ const css = StyleSheet.create({
   tittle: {
     fontFamily: 'Nunito-Black',
     fontSize: 18,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   error: {
     marginTop: '70%',

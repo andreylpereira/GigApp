@@ -44,15 +44,15 @@ const AvaliacaoBanda = ({navigation}) => {
         <View style={css.card}>
           <View>
             <View style={css.content}>
-              <View style={css.row}>
-                <View style={(css.column, {alignSelf: 'center'})}>
+              <View>
+                <View style={{alignSelf: 'center'}}>
                   <Image
                     style={css.image}
                     resizeMode="cover"
                     source={require('../../assets/fotos/redlights.jpg')}
                   />
                 </View>
-                <View style={(css.column, {width: 165})}>
+                <View style={{alignSelf: 'center'}}>
                   <Text style={css.tittle}>{item.nome}</Text>
                   <Text
                     multimultiline={true}

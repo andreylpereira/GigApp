@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   const {user} = useAuth();
 
-  if (user.perfil == 'banda') {
+  if (!user.provider) {
     return (
       <Tab.Navigator
         tabBarOptions={{
@@ -58,7 +58,7 @@ function Tabs() {
       </Tab.Navigator>
     );
   }
-  if (user.perfil == 'estabelecimento') {
+  if (user.provider) {
     return (
       <Tab.Navigator
         tabBarOptions={{

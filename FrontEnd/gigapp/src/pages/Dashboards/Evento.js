@@ -117,7 +117,7 @@ const Evento = ({navigation}) => {
   const [eventos, setEventos] = useState(eventos_mock);
   const {user} = useAuth();
 
-  if (user.perfil == 'banda') {
+  if (!user.provider) {
     const EventoBanda = ({item}) => {
       return (
         <View>
@@ -198,7 +198,7 @@ const Evento = ({navigation}) => {
       </View>
     );
   }
-  if (user.perfil == 'estabelecimento') {
+  if (user.provider) {
     const EventoEstabelecimento = ({item}) => {
       return (
         <View>
