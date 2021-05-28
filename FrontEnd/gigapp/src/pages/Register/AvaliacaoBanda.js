@@ -122,7 +122,7 @@ const css = StyleSheet.create({
     fontFamily: 'Nunito-Black',
     color: '#A1A1A1',
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: 12,
   },
   button: {
     borderWidth: 2,
