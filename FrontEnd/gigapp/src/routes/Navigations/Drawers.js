@@ -29,7 +29,7 @@ function Drawers() {
     function LogOut() {
       props.navigation.navigate('Login');
     }
-    if (user.perfil == 'banda') {
+    if (!user.provider) {
       return (
         <View>
           <View>
@@ -75,7 +75,7 @@ function Drawers() {
         </View>
       );
     }
-    if (user.perfil == 'estabelecimento') {
+    if (user.provider) {
       return (
         <View>
           <View>

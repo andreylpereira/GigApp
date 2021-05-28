@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -12,22 +12,28 @@ import {
   Image,
 } from 'react-native';
 
-import {signIn} from '../../services/auth';
-import {useAuth} from '../../context/auth';
+import { useAuth } from '../../context/auth';
 
-const Login = ({navigation}) => {
-  const {signed, user, signIn} = useAuth();
+const Login = ({ navigation }) => {
+  const { signed, user, signIn, signOut } = useAuth();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   console.log(signed);
-  console.log(user);
+  //console.log(user);  
+  //signOut();
 
   async function handleSignIn() {
-    signIn();
+    try {      
+      signIn(email, password);      
+    } catch (error) {
+      console.log('deu ruim ', error);
+    }
   }
 
-  const [offset] = useState(new Animated.ValueXY({x: 0, y: 80}));
+  const [offset] = useState(new Animated.ValueXY({ x: 0, y: 80 }));
   const [opacity] = useState(new Animated.Value(0));
-  const [logo] = useState(new Animated.ValueXY({x: 220, y: 220}));
+  const [logo] = useState(new Animated.ValueXY({ x: 220, y: 220 }));
 
   useEffect(() => {
     keyboardDidShowListener = Keyboard.addListener(
@@ -90,7 +96,7 @@ const Login = ({navigation}) => {
       <KeyboardAvoidingView style={css.container}>
         <View>
           <Animated.Image
-            style={{width: logo.x, height: logo.y}}
+            style={{ width: logo.x, height: logo.y }}
             source={require('../../assets/imagens/logo.png')}
           />
 
@@ -99,17 +105,19 @@ const Login = ({navigation}) => {
         <Animated.View
           style={{
             opacity: opacity,
-            transform: [{translateY: offset.y}],
+            transform: [{ translateY: offset.y }],
           }}>
           <TextInput
             style={css.input}
             placeholder="E-mail"
+            onChangeText={email => setEmail(email)}
             textContentType={'emailAddress'}
             autoCorrect={false}
           />
           <TextInput
             style={css.input}
             placeholder="Senha"
+            onChangeText={password => setPassword(password)}
             textContentType={'password'}
             secureTextEntry={true}
             autoCorrect={false}

@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useAuth } from '../../context/auth';
 
-import api from '../../services/api';
+import services from '../../services/services';
 
 const Evento = ({ navigation }) => {
 
@@ -117,23 +117,25 @@ const Evento = ({ navigation }) => {
     },
   ];
 
-  const [concerts, setConcerts] = useState(eventos_mock);
-  const { user } = useAuth();
+  const [concerts, setConcerts] = useState();
+  const { user, token } = useAuth();
 
-  const getConcerts = async () => {
-    try {
-      const response = await api.get('/concerts');
-      //console.log(JSON.stringify(response.data));
-      setConcerts(response.data);
-    } catch (error) {
-      console.log('Cannot get concerts ' + error);
-    }
-  };
+  // passar para outro arquivo.
+  
+  // const getConcerts = async ( token ) => {
+  //   try {
+  //     const response = await api.get('/concerts',  ); //inplementar o endpoint com o token
+  //     //console.log(JSON.stringify(response.data));
+  //     return response.data;
+  //   } catch (error) {
+  //     console.log('Cannot get concerts ' + error);
+  //   }
+  // };
 
   // const [eventos, setEventos] = useState(eventos_mock);
 
   useEffect(() => {
-    getConcerts();
+    setConcerts(services.getConcerts(token));
   }, [])
   console.log(concerts)
 

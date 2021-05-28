@@ -6,6 +6,7 @@ import {useAuth} from '../../context/auth';
 
 const Home = () => {
   const {user} = useAuth();
+  console.log(user);
 
   const mapLightStyle = [
     {
@@ -289,7 +290,7 @@ const Home = () => {
     },
   ];
 
-  if (user.perfil == 'estabelecimento') {
+  if (user.provider) {
     return (
       <>
         <StatusBar barStyle="dark-content" hidden={true} />
@@ -381,7 +382,7 @@ const Home = () => {
       </>
     );
   }
-  if (user.perfil == 'banda') {
+  if (!user.provider) {
     return (
       <>
         <StatusBar barStyle="dark-content" hidden={true} />
