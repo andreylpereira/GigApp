@@ -4,8 +4,9 @@ import DatabaseConfig from '../config/database';
 import User from '../app/models/User';
 import Band from '../app/models/Band';
 import Venue from '../app/models/Venue';
+import Concert from '../app/models/Concert';
 
-const models = [User, Band, Venue];
+const models = [User, Band, Venue, Concert];
 
 class DataBase {
     constructor() {

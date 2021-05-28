@@ -1,124 +1,148 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   ActivityIndicator,
+  FlatList
 } from 'react-native';
-import {FlatList} from 'react-native';
+
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useAuth} from '../../context/auth';
+import { useAuth } from '../../context/auth';
 
-const Evento = ({navigation}) => {
+import services from '../../services/services';
 
-// // falta puxar as funções
-  
-//   // Constantes que pegam os campos
-//   const [idEvento, setIdEvento] = useState("");
-//   const [tituloEvento, setTituloEvento] = useState("");
-//   const [estabelecimentoEvento, setEstabelecimentoEvento] = useState("");
-//   const [dataEvento, setDataEvento] = useState("");
-//   const [descricaoEvento, setDescricaoEvento] = useState("");
-//   const [banda1Evento, setBanda1Evento] = useState("");
-//   const [banda2Evento, setBanda2Evento] = useState("");
-  
-//   // Post
-//   const criarEvento = async () => {
-//     if(idEvento && tituloEvento && estabelecimentoEvento && dataEvento && descricaoEvento && banda1Evento && banda2Evento){
-//       try{ //falta vincular rota com backend e 
-//         const response = await api.post('/rota', { "tituloEvento": tituloEvento, "estabelecimentoEvento": estabelecimentoEvento, "dataEvento": dataEvento, "descricaoEvento": descricaoEvento, "banda1Evento": banda1Evento, "banda2Evento": banda2Evento })
-//         console.log(JSON.stringify(response.data))
-//       } catch(error){
-//         console.log("DEU ERRO" + error)
-//       }
-//     }
-//   }
+const Evento = ({ navigation }) => {
 
-//   // Get
-//   const [lista, setLista] = useState();
+  // falta puxar as funções
 
-//   const listarEvento = async () => {
-//     try { //Falta rota
-//       const response = await api.get('/rota');
-//       console.log(JSON.stringify(response.data));
-//       setListas(response.data);
+  // Constantes que pegam os campos
+  // const [idEvento, setIdEvento] = useState("");
+  // const [tituloEvento, setTituloEvento] = useState("");
+  // const [estabelecimentoEvento, setEstabelecimentoEvento] = useState("");
+  // const [dataEvento, setDataEvento] = useState("");
+  // const [descricaoEvento, setDescricaoEvento] = useState("");
+  // const [banda1Evento, setBanda1Evento] = useState("");
+  // const [banda2Evento, setBanda2Evento] = useState("");  
 
-//     } catch (error) {
-//       console.log('DEU RUIM' + error);
-//     }
-//   }
+  // Post
+  // const criarEvento = async () => {
+  //   if (idEvento && tituloEvento && estabelecimentoEvento && dataEvento && descricaoEvento && banda1Evento && banda2Evento) {
+  //     try { //falta vincular rota com backend e 
+  //       const response = await api.post('/rota', { "tituloEvento": tituloEvento, "estabelecimentoEvento": estabelecimentoEvento, "dataEvento": dataEvento, "descricaoEvento": descricaoEvento, "banda1Evento": banda1Evento, "banda2Evento": banda2Evento })
+  //       console.log(JSON.stringify(response.data))
+  //     } catch (error) {
+  //       console.log("DEU ERRO" + error)
+  //     }
+  //   }
+  // }
 
-//   // Put
-//   const id = route.params._id; // puxar esse id quando criarmos o botão
-//   const editarEvento = async (id) => {
-//     try { // ajustar rota 
-//       const response = await api.put(`/rota/${id}`, { "tituloEvento": tituloEvento, "estabelecimentoEvento": estabelecimentoEvento, "dataEvento": dataEvento, "descricaoEvento": descricaoEvento, "banda1Evento": banda1Evento, "banda2Evento": banda2Evento });
-//       console.log(JSON.stringify(response.data));
-//       setListas(response.data)
+  // Get
+  // const [lista, setLista] = useState();
 
-//     } catch (error) {
-//       console.log('DEU RUIM' + error);
-//     }
-//   }
+  // const listarEvento = async () => {
+  //   try { //Falta rota
+  //     const response = await api.get('/rota');
+  //     console.log(JSON.stringify(response.data));
+  //     setListas(response.data);
 
-// // Delete
-// const deletarEvento = async (id) => {
-//   try { // ajustar rota
-//     const response = await api.delete(`/rota/${id}`)
-//     console.log(JSON.stringify(response.data));
+  //   } catch (error) {
+  //     console.log('DEU RUIM' + error);
+  //   }
+  // }
 
-//   } catch (error) {
-//     console.log('DEU RUIM' + error);
-//   }
-//   listarEvento();
-// };
+  // // Put
+  // const id = route.params._id; // puxar esse id quando criarmos o botão
+  // const editarEvento = async (id) => {
+  //   try { // ajustar rota 
+  //     const response = await api.put(`/rota/${id}`, { "tituloEvento": tituloEvento, "estabelecimentoEvento": estabelecimentoEvento, "dataEvento": dataEvento, "descricaoEvento": descricaoEvento, "banda1Evento": banda1Evento, "banda2Evento": banda2Evento });
+  //     console.log(JSON.stringify(response.data));
+  //     setListas(response.data)
+
+  //   } catch (error) {
+  //     console.log('DEU RUIM' + error);
+  //   }
+  // }
+
+  // // Delete
+  // const deletarEvento = async (id) => {
+  //   try { // ajustar rota
+  //     const response = await api.delete(`/rota/${id}`)
+  //     console.log(JSON.stringify(response.data));
+
+  //   } catch (error) {
+  //     console.log('DEU RUIM' + error);
+  //   }
+  //   listarEvento();
+  // };
 
 
   const eventos_mock = [
     {
-      id: 1,
-      titulo: 'Show do Daza',
-      estabelecimento: 'John Bull',
-      data: '24/10/1950',
-      descricao: 'das dasd asd',
-      banda1: 'faf a2',
-      banda2: 'd gsgs',
+      id: 10,
+      name: 'Show do Daza',
+      // estabelecimento: 'John Bull',
+      date: '24/10/1950',
+      description: 'das dasd asd',
+      // banda1: 'faf a2',
+      // banda2: 'd gsgs',
     },
     {
-      id: 2,
-      titulo: '142131 asda',
-      estabelecimento: ' asd22',
-      data: '25/10/1950',
-      descricao: ' gdfgdf',
-      banda1: ' dfgd2',
-      banda2: ' sdasd',
+      id: 20,
+      name: '142131 asda',
+      //estabelecimento: ' asd22',
+      date: '25/10/1950',
+      description: ' gdfgdf',
+      // banda1: ' dfgd2',
+      // banda2: ' sdasd',
     },
     {
-      id: 3,
-      titulo: 'Teste2',
-      estabelecimento: 'Celulsdfsda',
-      data: '26/10/1950',
-      descricao: 'Último shsdfsdfsdw do Strokes nessa bagaça teste',
-      banda1: 'Strokdsfsdfes',
-      banda2: 'AfdsfsdfM',
+      id: 30,
+      name: 'Teste2',
+      // estabelecimento: 'Celulsdfsda',
+      date: '26/10/1950',
+      description: 'Último shsdfsdfsdw do Strokes nessa bagaça teste',
+      // banda1: 'Strokdsfsdfes',
+      // banda2: 'AfdsfsdfM',
     },
     {
-      id: 4,
-      titulo: 'teste4',
-      estabelecimento: 'Celula',
-      data: '27/10/1950',
-      descricao: 'Úgfgfça',
-      banda1: 'Stroke331s',
-      banda2: 'AM2131',
+      id: 40,
+      name: 'teste4',
+      // estabelecimento: 'Celula',
+      date: '27/10/1950',
+      description: 'Úgfgfça',
+      // banda1: 'Stroke331s',
+      // banda2: 'AM2131',
     },
   ];
 
-  const [eventos, setEventos] = useState(eventos_mock);
-  const {user} = useAuth();
+  const [concerts, setConcerts] = useState();
+  const { user, token } = useAuth();
+
+  // passar para outro arquivo.
+  
+  // const getConcerts = async ( token ) => {
+  //   try {
+  //     const response = await api.get('/concerts',  ); //inplementar o endpoint com o token
+  //     //console.log(JSON.stringify(response.data));
+  //     return response.data;
+  //   } catch (error) {
+  //     console.log('Cannot get concerts ' + error);
+  //   }
+  // };
+
+  // const [eventos, setEventos] = useState(eventos_mock);
+
+  useEffect(() => {
+    setConcerts(services.getConcerts(token));
+  }, [])
+  console.log(concerts)
+
 
   if (!user.provider) {
     const EventoBanda = ({item}) => {
+
       return (
         <View>
           <View style={css.icons}>
@@ -135,7 +159,7 @@ const Evento = ({navigation}) => {
             <View style={css.content}>
               <View style={css.rows}>
                 <Text style={css.label}>Evento: </Text>
-                <Text style={css.tittle}>{item.titulo}</Text>
+                <Text style={css.tittle}>{item.name}</Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Estabelecimento: </Text>
@@ -143,12 +167,12 @@ const Evento = ({navigation}) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.tittle}>
-                  {item.estabelecimento}
+                  {/* {item.estabelecimento} */}
                 </Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Data: </Text>
-                <Text style={css.description}>{item.data}</Text>
+                <Text style={css.description}>{item.date}</Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Descrição: </Text>
@@ -156,8 +180,12 @@ const Evento = ({navigation}) => {
                   style={css.description}
                   multimultiline={true}
                   numberOfLines={2}>
-                  {item.descricao}
+                  {item.description}
                 </Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Entrada: </Text>
+                <Text style={css.tittle}>{item.ticketPrice}</Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Bandas: </Text>
@@ -165,7 +193,7 @@ const Evento = ({navigation}) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.description}>
-                  {item.banda1}, {item.banda2}
+                  {/* {item.banda1}, {item.banda2} */}
                 </Text>
               </View>
             </View>
@@ -191,19 +219,21 @@ const Evento = ({navigation}) => {
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
-            data={eventos_mock}
+            data={concerts}
             renderItem={EventoBanda}
             keyExtractor={item => item.id}></FlatList>
         </View>
       </View>
     );
   }
+
   if (user.provider) {
     const EventoEstabelecimento = ({item}) => {
+
       return (
         <View>
           <View style={css.icons}>
-          <View style={css.iconMaps}>
+            <View style={css.iconMaps}>
               <Icon
                 name={'locate'}
                 size={16}
@@ -227,7 +257,7 @@ const Evento = ({navigation}) => {
             <View style={css.content}>
               <View style={css.rows}>
                 <Text style={css.label}>Evento: </Text>
-                <Text style={css.tittle}>{item.titulo}</Text>
+                <Text style={css.tittle}>{item.name}</Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Estabelecimento: </Text>
@@ -235,12 +265,12 @@ const Evento = ({navigation}) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.tittle}>
-                  {item.estabelecimento}
+                  {/* {item.estabelecimento} */}
                 </Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Data: </Text>
-                <Text style={css.description}>{item.data}</Text>
+                <Text style={css.description}>{item.date}</Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Descrição: </Text>
@@ -248,8 +278,12 @@ const Evento = ({navigation}) => {
                   style={css.description}
                   multimultiline={true}
                   numberOfLines={2}>
-                  {item.descricao}
+                  {item.description}
                 </Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Entrada: </Text>
+                <Text style={css.tittle}>{item.ticketPrice}</Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Bandas: </Text>
@@ -257,7 +291,7 @@ const Evento = ({navigation}) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.description}>
-                  {item.banda1}, {item.banda2}
+                  {/* {item.banda1}, {item.banda2} */}
                 </Text>
               </View>
             </View>
@@ -283,7 +317,7 @@ const Evento = ({navigation}) => {
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
-            data={eventos_mock}
+            data={concerts}
             renderItem={EventoEstabelecimento}
             keyExtractor={item => item.id}></FlatList>
         </View>

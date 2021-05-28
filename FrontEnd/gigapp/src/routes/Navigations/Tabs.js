@@ -124,6 +124,7 @@ function Tabs() {
         <View style={css.error}>
           <ActivityIndicator size="large" color="#FF7306" />
         </View>
+
       </View>
     );
   }
