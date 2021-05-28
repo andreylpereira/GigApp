@@ -1,25 +1,28 @@
-interface Response {
-    token: string;
-    user: {
-        name: string;
-        perfil: string;
-        email: string;
-        password: string;
-    }
-}
+// import services from './services';
 
-export function signIn(): Promise<Response> {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlRoaWFnbyIsInN1YiI6IjEzIiwianRpIjoiZDBlMGFkZDItOTlkMC00NWY1LThlYzEtY2FiYzIwZjkxMGYyIiwiaWF0IjoxNTAwMDMzMjE0LCJKd3RWYWxpZGF0aW9uIjoiVXN1YXJpbyIsIm5iZiI6MTUwMDAzMzIxMywiZXhwIjoxNTAwMDMzMjczLCJpc3MiOiJJc3N1ZXIiLCJhdWQiOiJBdWRpZW5jZSJ9.SmjuyXgloA2RUhIlAEetrQwfC0EhBmhu-xOMzyY3Y_Q',
-                user: {
-                    name: 'Andrey Luiz',
-                    perfil: 'estabelecimento',
-                    email: 'gigapp@gmail.com',
-                    password: 'teste'
-                },
-            })
-        }, 1000);
-    });
-}
+// interface Response {
+//     token: string;
+//     user: {
+//         name: string;
+//         provider: boolean;
+//         email: string;
+//         password: string;
+//     }
+// }
+
+// export function signIn(): Promise<Response> {
+//     return new Promise((resolve) => {
+//         setTimeout(() => {
+//             resolve({
+//                 token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaWF0IjoxNjIyMTYyNzQ3LCJleHAiOjE2MjI3Njc1NDd9.je5Y2WZN8a50I14uwhlqGdvJVrcqKfN0ryzt9h2HbV4',
+//                 user: {
+//                     //deixar igual ao session do back
+//                     name: 'Andrey Luiz',
+//                     provider: true,
+//                     email: 'gigapp@gmail.com',
+//                     password: 'teste123'
+//                 },
+//             })
+//         }, 1000);
+//     });
+// }
