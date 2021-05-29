@@ -58,6 +58,27 @@ const Agenda = ({navigation}) => {
     const EventoBanda = ({item}) => {
       return (
         <View>
+          <View style={css.icons}>
+          <View style={css.iconMaps2}>
+              <Icon
+                name={'locate'}
+                size={16}
+                color={'#FF6400'}
+                onPress={() => navigation.navigate('Maps')}
+              />
+            </View>
+            <View style={css.iconEdit}>
+              <Icon
+                name={'pencil-outline'}
+                size={16}
+                color={'#FF6400'}
+                onPress={() => navigation.navigate('EditarEvento')}
+              />
+            </View>
+            <View style={css.iconDelete}>
+              <Icon name={'trash-bin'} size={16} color={'#FF6400'} />
+            </View>
+          </View>
           <View style={css.card}>
             <View style={css.content}>
               <View style={css.rows}>
@@ -305,6 +326,16 @@ const css = StyleSheet.create({
     paddingLeft: 4,
     elevation: 7.5,
     marginRight: '1%',
+  },
+  iconMaps2: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderRadius: 4.5,
+    padding: 4,
+    paddingLeft: 4,
+    elevation: 7.5,
+    marginRight: '5%',
   },
   iconEdit: {
     borderWidth: 1,

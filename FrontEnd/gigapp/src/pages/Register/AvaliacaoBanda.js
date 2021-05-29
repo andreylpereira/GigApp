@@ -4,7 +4,7 @@ import {FlatList} from 'react-native';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const SelecaoBanda = ({navigation}) => {
+const AvaliacaoBanda = ({navigation}) => {
   const eventos_mock = [
     {
       id: 1,
@@ -38,7 +38,7 @@ const SelecaoBanda = ({navigation}) => {
 
   const {user} = useAuth();
 
-  const SelecionarBanda = ({item}) => {
+  const AvaliarBanda = ({item}) => {
     return (
       <View>
         <View style={css.card}>
@@ -77,7 +77,7 @@ const SelecaoBanda = ({navigation}) => {
             <TouchableOpacity
               style={css.button}
               onPress={() => navigation.navigate('Avaliacao')}>
-              <Text style={css.buttonText}>Selecionar</Text>
+              <Text style={css.buttonText}>Avaliar</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -90,7 +90,7 @@ const SelecaoBanda = ({navigation}) => {
         <FlatList
           removeClippedSubviews={false}
           data={eventos_mock}
-          renderItem={SelecionarBanda}
+          renderItem={AvaliarBanda}
           keyExtractor={item => item.id}></FlatList>
       </View>
     </View>
@@ -193,7 +193,7 @@ const css = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 15,
-  },
+  }
 });
 
-export default SelecaoBanda;
+export default AvaliacaoBanda;

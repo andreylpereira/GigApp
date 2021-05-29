@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useEffect, useContext } from 'react';
 //import { View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -22,23 +23,26 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+
   const [token, setToken] = useState<string | null>(null);
 
      //const [setLoading] = useState(true);
+
 
   useEffect(() => {
     async function loadStoragedData() {
       const storagedUser = await AsyncStorage.getItem('@GAAuth:user');
       const storagedToken = await AsyncStorage.getItem('@GAToken:token');
 
-      // await new Promise(resolve => setTimeout(resolve, 2000));
-
       if (storagedUser && storagedToken) {
         api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
 
         setUser(JSON.parse(storagedUser));
+
         setToken(storagedToken)
         //setLoading(false);
+
+
       }
     }
     loadStoragedData();
@@ -72,8 +76,6 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-// export default AuthContext;
 
 export function useAuth() {
   const context = useContext(AuthContext);

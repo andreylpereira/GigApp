@@ -97,7 +97,7 @@ const EditarEvento = ({navigation}) => {
           {/* 
           style={css.button}
           onPress={() => navigation.goBack()}>   */}
-          <Text style={css.buttonText}>Criar</Text>
+          <Text style={css.buttonText}>Editar</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </>
@@ -106,7 +106,6 @@ const EditarEvento = ({navigation}) => {
 
 const css = StyleSheet.create({
   container: {
-    // backgroundColor: '#131313',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -120,7 +119,7 @@ const css = StyleSheet.create({
     height: 45,
     backgroundColor: '#FF6400',
     alignSelf: 'center',
-    marginTop: 15,
+    marginTop: 20,
     elevation: 9.5,
   },
   buttonText: {
