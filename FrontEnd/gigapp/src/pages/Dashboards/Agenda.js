@@ -52,7 +52,7 @@ const Agenda = ({navigation}) => {
   ];
 
   const [eventos, setEventos] = useState(eventos_mock);
-  const {user} = useAuth();
+  const {user, token} = useAuth();
 
   if (!user.provider) {
     const EventoBanda = ({item}) => {

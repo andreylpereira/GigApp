@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, ActivityIndicator} from 'react-native';
-import {useAuth} from '../../context/auth';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { useAuth } from '../../context/auth';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../../pages/Dashboards/Home';
 import Evento from '../../pages/Dashboards/Evento';
 import CadastroEvento from '../../pages/Register/CadastroEvento';
@@ -10,7 +10,7 @@ import CadastroEvento from '../../pages/Register/CadastroEvento';
 const Tab = createBottomTabNavigator();
 
 function Tabs() {
-  const {user} = useAuth();
+  const { user } = useAuth();
 
   if (!user.provider) {
     return (
@@ -32,7 +32,7 @@ function Tabs() {
           component={Home}
           options={{
             tabBarLabel: 'HOME',
-            tabBarIcon: ({color, focused}) => (
+            tabBarIcon: ({ color, focused }) => (
               <Icon
                 name="home-outline"
                 color={color}
@@ -46,7 +46,7 @@ function Tabs() {
           component={Evento}
           options={{
             tabBarLabel: 'Evento',
-            tabBarIcon: ({color, focused}) => (
+            tabBarIcon: ({ color, focused }) => (
               <Icon
                 name="calendar-outline"
                 color={color}
@@ -78,7 +78,7 @@ function Tabs() {
           component={Home}
           options={{
             tabBarLabel: 'HOME',
-            tabBarIcon: ({color, focused}) => (
+            tabBarIcon: ({ color, focused }) => (
               <Icon
                 name="home-outline"
                 color={color}
@@ -92,7 +92,7 @@ function Tabs() {
           component={CadastroEvento}
           options={{
             tabBarLabel: 'Adicionar Evento',
-            tabBarIcon: ({focused, size}) => (
+            tabBarIcon: ({ focused, size }) => (
               <Icon
                 style={css.iconAdd}
                 name="add-circle-sharp"
@@ -107,7 +107,7 @@ function Tabs() {
           component={Evento}
           options={{
             tabBarLabel: 'Evento',
-            tabBarIcon: ({color, focused}) => (
+            tabBarIcon: ({ color, focused }) => (
               <Icon
                 name="calendar-outline"
                 color={color}

@@ -93,7 +93,7 @@ class ConcertController {
             const concerts = await Concert.findAll();
             return res.json(concerts);
         } catch (error) {
-            res.status(500).send({ message: 'An error occurred ' + error });
+            res.status(500).send({ message: 'An error occurred ', error });
             console.log(error);
         }
     }

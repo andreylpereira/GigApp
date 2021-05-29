@@ -1,6 +1,6 @@
 
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+//import { View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 import services from '../services/services';
@@ -11,6 +11,7 @@ interface User {
 }
 
 interface AuthContextData {
+  provider: boolean;
   signed: boolean;
   user: User | null;
   signIn(): Promise<void>;
