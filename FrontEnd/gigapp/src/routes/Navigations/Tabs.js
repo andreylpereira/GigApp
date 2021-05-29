@@ -11,7 +11,7 @@ import CadastroEvento from '../../pages/Register/CadastroEvento';
 const Tab = createBottomTabNavigator();
 
 function Tabs() {
-    const {user} = useAuth();
+    const {user} = useAuth();        
 
     if (!user.provider) {
       return (
