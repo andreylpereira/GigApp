@@ -5,8 +5,8 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {useAuth} from '../../context/auth';
 
 const Home = () => {
-  const {user} = useAuth();
-  console.log(user);
+  const {user, token} = useAuth();
+  //console.log(user);
 
   const mapLightStyle = [
     {
