@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useAuth } from '../../context/auth';
 
 import services from '../../services/services';
-import api from '../../services/api';
 
 const Evento = ({ navigation }) => {
 
