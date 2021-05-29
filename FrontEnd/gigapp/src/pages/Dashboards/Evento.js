@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useAuth } from '../../context/auth';
 
 import services from '../../services/services';
+import api from '../../services/api';
 
 const Evento = ({ navigation }) => {
 
@@ -77,70 +78,22 @@ const Evento = ({ navigation }) => {
   //   listarEvento();
   // };
 
-
-  const eventos_mock = [
-    {
-      id: 10,
-      name: 'Show do Daza',
-      // estabelecimento: 'John Bull',
-      date: '24/10/1950',
-      description: 'das dasd asd',
-      // banda1: 'faf a2',
-      // banda2: 'd gsgs',
-    },
-    {
-      id: 20,
-      name: '142131 asda',
-      //estabelecimento: ' asd22',
-      date: '25/10/1950',
-      description: ' gdfgdf',
-      // banda1: ' dfgd2',
-      // banda2: ' sdasd',
-    },
-    {
-      id: 30,
-      name: 'Teste2',
-      // estabelecimento: 'Celulsdfsda',
-      date: '26/10/1950',
-      description: 'Último shsdfsdfsdw do Strokes nessa bagaça teste',
-      // banda1: 'Strokdsfsdfes',
-      // banda2: 'AfdsfsdfM',
-    },
-    {
-      id: 40,
-      name: 'teste4',
-      // estabelecimento: 'Celula',
-      date: '27/10/1950',
-      description: 'Úgfgfça',
-      // banda1: 'Stroke331s',
-      // banda2: 'AM2131',
-    },
-  ];
-
-  const [concerts, setConcerts] = useState();
+  const [concerts, setConcerts] = useState([]);
   const { user, token } = useAuth();
 
-  // passar para outro arquivo.
-  
-  // const getConcerts = async ( token ) => {
-  //   try {
-  //     const response = await api.get('/concerts',  ); //inplementar o endpoint com o token
-  //     //console.log(JSON.stringify(response.data));
-  //     return response.data;
-  //   } catch (error) {
-  //     console.log('Cannot get concerts ' + error);
-  //   }
-  // };
+  useEffect(async () => {
+    const concerts = await services.getConcerts();
+    setConcerts(concerts);
 
-  // const [eventos, setEventos] = useState(eventos_mock);
+  }, []);
 
-  useEffect(() => {
-    setConcerts(services.getConcerts(token));
-  }, [])
+
   console.log(concerts)
+  console.log(user.provider)
 
-  if (user.perfil == 'banda') {
+  if (!user.provider) {
     const EventoBanda = ({ item }) => {
+
       return (
         <View>
           <View style={css.card}>
@@ -207,15 +160,18 @@ const Evento = ({ navigation }) => {
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
+            keyExtractor={(item) => item.id}
             data={concerts}
             renderItem={EventoBanda}
-            keyExtractor={item => item.id}></FlatList>
+
+          />
         </View>
       </View>
     );
   }
-  if (user.perfil == 'estabelecimento') {
+  if (user.provider) {
     const EventoEstabelecimento = ({ item }) => {
+
       return (
         <View>
           <View style={css.icons}>
@@ -251,7 +207,7 @@ const Evento = ({ navigation }) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.tittle}>
-                  {/* {item.estabelecimento} */}
+                  {item.name}
                 </Text>
               </View>
               <View style={css.rows}>
@@ -277,7 +233,7 @@ const Evento = ({ navigation }) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.description}>
-                  {/* {item.banda1}, {item.banda2} */}
+                  {item.name}
                 </Text>
               </View>
             </View>
@@ -303,9 +259,10 @@ const Evento = ({ navigation }) => {
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
+            keyExtractor={item => item.id}
             data={concerts}
             renderItem={EventoEstabelecimento}
-            keyExtractor={item => item.id}></FlatList>
+          />
         </View>
       </View>
     );
