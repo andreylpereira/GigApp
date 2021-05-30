@@ -5,7 +5,6 @@ class UserController {
     async store(req, res) {
 
         try {
-
             const schema = Yup.object().shape({
                 name: Yup.string().required(),
                 email: Yup.string()
@@ -24,6 +23,7 @@ class UserController {
             if (userExists) {
                 return res.status(400).json({ error: 'User already exists.' });
             }
+
             const { id, name, email, provider } = await User.create(req.body);
             return res.json({
                 id,
@@ -40,7 +40,6 @@ class UserController {
     async update(req, res) {
 
         try {
-
             const schema = Yup.object().shape({
                 name: Yup.string(),
                 email: Yup.string().email(),
@@ -61,6 +60,7 @@ class UserController {
 
             const { email, oldPassword } = req.body;
             const user = await User.findByPk(req.userId);
+            
             if (email !== user.email) {
                 const userExists = await User.findOne({
                     where: { email },
@@ -77,13 +77,15 @@ class UserController {
                 });
             }
 
-            const { id, name, provider } = await user.update(req.body);
+            const { id, name, provider, createdAt, updatedAt } = await user.update(req.body);
 
             return res.json({
                 id,
                 name,
                 email,
-                provider
+                provider,
+                createdAt,
+                updatedAt
             });
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });
@@ -92,10 +94,10 @@ class UserController {
     }
 
     // async index() { }
+
     async show(req, res) {
 
         try {
-            
             const users = await User.findAll();
             return res.json(users);
         } catch (error) {
@@ -103,8 +105,8 @@ class UserController {
             console.log(error);
         }
     }
-    // async delete() { }
 
+    // async delete() { }
 }
 
 export default new UserController();

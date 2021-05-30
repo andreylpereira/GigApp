@@ -83,13 +83,7 @@ const Evento = ({ navigation }) => {
   useEffect(async () => {
     const concerts = await services.getConcerts();
     setConcerts(concerts);
-
-  }, []);
-
-
-  console.log(concerts)
-  console.log(user.provider)
-
+  }, []); 
 
   if (!user.provider) {
     const EventoBanda = ({item}) => {
