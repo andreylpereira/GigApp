@@ -41,8 +41,7 @@ export const AuthProvider = ({ children }) => {
 
         setToken(storagedToken)
         //setLoading(false);
-
-
+        
       }
     }
     loadStoragedData();

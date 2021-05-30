@@ -5,9 +5,8 @@ class ConcertController {
     async store(req, res) {
 
         try {
-
             const schema = Yup.object().shape({
-                name: Yup.string().required()                
+                name: Yup.string().required()
             });
 
             if (!(await schema.isValid(req.body))) {
@@ -18,6 +17,7 @@ class ConcertController {
             if (concertExists) {
                 return res.status(400).json({ error: 'Concert already exists.' });
             }
+
             const { id, name, description, date, ticketPrice } = await Concert.create(req.body);
             return res.json({
                 id,
@@ -32,73 +32,80 @@ class ConcertController {
         }
     }
 
-    // async update(req, res) {
+    async update(req, res) {
 
-    //     try {
+        try {
+            const { name, description, date, ticketPrice } = req.body;
+            const concert = await Concert.findByPk(req.params.id);            
 
-    //         const schema = Yup.object().shape({
-    //             name: Yup.string(),
-    //             email: Yup.string().email(),
-    //             oldPassword: Yup.string().min(6),
-    //             password: Yup.string()
-    //                 .min(6)
-    //                 .when('oldPassword', (oldPassword, field) =>
-    //                     oldPassword ? field.required() : field
-    //                 ),
-    //             confirmPassword: Yup.string().when('password', (password, field) =>
-    //                 password ? field.required().oneOf([Yup.ref('password')]) : field
-    //             ),
-    //         });
+            if (name !== concert.name) {
+                const concertExists = await Concert.findOne({
+                    where: { name },
+                });
+                if (concertExists) {
+                    return res.status(400).json({
+                        error: 'Concert already exists.'
+                    });
+                }
+            }
 
-    //         if (!(await schema.isValid(req.body))) {
-    //             return res.status(400).json({ error: 'Validation fails' });
-    //         }
+            if (!concert) {
+                return res.status(400).json({ error: 'The concert does not exist.' });
+            }
 
-    //         const { email, oldPassword } = req.body;
-    //         const concert = await concert.findByPk(req.concertId);
-    //         if (email !== concert.email) {
-    //             const concertExists = await concert.findOne({
-    //                 where: { email },
-    //             });
-    //             if (concertExists) {
-    //                 return res.status(400).json({
-    //                     error: 'Concert already exists.'
-    //                 });
-    //             }
-    //         }
-    //         if (oldPassword && !(await Concert.checkPassword(oldPassword))) {
-    //             return res.status(401).json({
-    //                 error: 'Password does not match.'
-    //             });
-    //         }
+            const { id, createdAt, updatedAt } = await concert.update(req.body);
 
-    //         const { id, name, provider } = await Concert.update(req.body);
-
-    //         return res.json({
-    //             id,
-    //             name,
-    //             email,
-    //             provider
-    //         });
-    //     } catch (error) {
-    //         res.status(500).send({ message: 'An error occurred ' + error });
-    //         console.log(error);
-    //     }
-    // }
-
-    // // async index() { }
-    async show(req, res) {
-
-        try {            
-            const concerts = await Concert.findAll();
-            return res.json(concerts);
+            return res.json({
+                id,
+                name,
+                description,
+                date,
+                ticketPrice,
+                createdAt,
+                updatedAt
+            });
         } catch (error) {
-            res.status(500).send({ message: 'An error occurred ', error });
+            res.status(500).send({ message: 'An error occurred ' + error });
             console.log(error);
         }
     }
-    // // async delete() { }
 
+    async show(req, res) {
+
+        try {
+            const concerts = await Concert.findAll();
+            return res.json(concerts);
+        } catch (error) {
+            res.status(500).send({ message: 'An error occurred ' + error });
+            console.log(error);
+        }
+    }
+
+    async showWithId(req, res) {
+        try {
+            const concerts = await Concert.findByPk(req.params.id);
+            if (!concerts) {
+                return res.status(400).json({ error: 'The concert does not exist.' });
+            }
+            return res.json(concerts);
+        } catch (error) {
+            res.status(500).send({ message: 'An error occurred ' + error });
+            console.log(error);
+        }
+    }
+
+    async delete(req, res) {
+        try {
+            const concerts = await Concert.destroy({ where: { id: req.params.id } });
+            if (!concerts) {
+                return res.status(400).json({ error: 'The concert does not exist.' });
+            }
+            res.status(200).send({ message: 'Concert deleted with sucess!!' });
+            console.log(concerts);
+        } catch (error) {
+            res.status(500).send({ message: 'Failel to delete the concert!', error });
+        }
+    }
 }
 
 export default new ConcertController();

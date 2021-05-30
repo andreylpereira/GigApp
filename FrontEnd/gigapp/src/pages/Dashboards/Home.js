@@ -1,189 +1,196 @@
-import React, {useState} from 'react';
-import {StatusBar, StyleSheet, Text, View,  TouchableOpacity, ActivityIndicator} from 'react-native';
-import {FlatList} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StatusBar, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useAuth} from '../../context/auth';
+import { useAuth } from '../../context/auth';
 
+import services from '../../services/services';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
 
-const eventos_mock = [
-  {
-    id: 1,
-    titulo: 'Show do Daza',
-    estabelecimento: 'John Bull',
-    data: '24/10/1950',
-    descricao: 'das dasd asd',
-    banda1: 'faf a2',
-    banda2: 'd gsgs',
-  },
-  {
-    id: 2,
-    titulo: '142131 asda',
-    estabelecimento: ' asd22',
-    data: '25/10/1950',
-    descricao: ' gdfgdf',
-    banda1: ' dfgd2',
-    banda2: ' sdasd',
-  },
-  {
-    id: 3,
-    titulo: 'Teste2',
-    estabelecimento: 'Celulsdfsda',
-    data: '26/10/1950',
-    descricao: 'Último shsdfsdfsdw do Strokes nessa bagaça teste',
-    banda1: 'Strokdsfsdfes',
-    banda2: 'AfdsfsdfM',
-  },
-  {
-    id: 4,
-    titulo: 'teste4',
-    estabelecimento: 'Celula',
-    data: '27/10/1950',
-    descricao: 'Úgfgfça',
-    banda1: 'Stroke331s',
-    banda2: 'AM2131',
-  },
-];
+  // const eventos_mock = [
+  //   {
+  //     id: 1,
+  //     titulo: 'Show do Daza',
+  //     estabelecimento: 'John Bull',
+  //     data: '24/10/1950',
+  //     descricao: 'das dasd asd',
+  //     banda1: 'faf a2',
+  //     banda2: 'd gsgs',
+  //   },
+  //   {
+  //     id: 2,
+  //     titulo: '142131 asda',
+  //     estabelecimento: ' asd22',
+  //     data: '25/10/1950',
+  //     descricao: ' gdfgdf',
+  //     banda1: ' dfgd2',
+  //     banda2: ' sdasd',
+  //   },
+  //   {
+  //     id: 3,
+  //     titulo: 'Teste2',
+  //     estabelecimento: 'Celulsdfsda',
+  //     data: '26/10/1950',
+  //     descricao: 'Último shsdfsdfsdw do Strokes nessa bagaça teste',
+  //     banda1: 'Strokdsfsdfes',
+  //     banda2: 'AfdsfsdfM',
+  //   },
+  //   {
+  //     id: 4,
+  //     titulo: 'teste4',
+  //     estabelecimento: 'Celula',
+  //     data: '27/10/1950',
+  //     descricao: 'Úgfgfça',
+  //     banda1: 'Stroke331s',
+  //     banda2: 'AM2131',
+  //   },
+  // ];
 
-const [eventos, setEventos] = useState(eventos_mock);
-const {user} = useAuth();
+  const [concerts, setConcerts] = useState();
+  const { user } = useAuth();
 
-if (!user.provider) {
-  const EventoBanda = ({item}) => {
-    return (
-      <View>
-        <View style={css.icons}>
-        <View style={css.iconMaps2}>
-            <Icon
-              name={'locate'}
-              size={16}
-              color={'#FF6400'}
-              onPress={() => navigation.navigate('Maps')}
-            />
-          </View>
-        </View>
-        <View style={css.card}>
-          <View style={css.content}>
-            <View style={css.rows}>
-              <Text style={css.label}>Evento: </Text>
-              <Text style={css.tittle}>{item.titulo}</Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Estabelecimento: </Text>
-              <Text
-                multimultiline={true}
-                numberOfLines={2}
-                style={css.tittle}>
-                {item.estabelecimento}
-              </Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Data: </Text>
-              <Text style={css.description}>{item.data}</Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Descrição: </Text>
-              <Text
-                style={css.description}
-                multimultiline={true}
-                numberOfLines={2}>
-                {item.descricao}
-              </Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Bandas: </Text>
-              <Text
-                multimultiline={true}
-                numberOfLines={2}
-                style={css.description}>
-                {item.banda1}, {item.banda2}
-              </Text>
+  useEffect(async () => {
+    const concerts = await services.getConcerts();
+    setConcerts(concerts);
+    
+  }, [concerts]);
+
+  if (!user.provider) {
+    const EventoBanda = ({ item }) => {
+      return (
+        <View>
+          <View style={css.icons}>
+            <View style={css.iconMaps2}>
+              <Icon
+                name={'locate'}
+                size={16}
+                color={'#FF6400'}
+                onPress={() => navigation.navigate('Maps')}
+              />
             </View>
           </View>
-          <View style={css.buttons}>
-            <TouchableOpacity
-              style={css.button}
-              onPress={() => navigation.navigate('SelecaoBanda')}>
-              <Text style={css.buttonText}>Candidatar-se</Text>
-            </TouchableOpacity>
-            {/* <TouchableOpacity
+          <View style={css.card}>
+            <View style={css.content}>
+              <View style={css.rows}>
+                <Text style={css.label}>Evento: </Text>
+                <Text style={css.tittle}>{item.name}</Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Estabelecimento: </Text>
+                <Text
+                  multimultiline={true}
+                  numberOfLines={2}
+                  style={css.tittle}>
+                  {item.description}
+                </Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Data: </Text>
+                <Text style={css.description}>{item.date}</Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Descrição: </Text>
+                <Text
+                  style={css.description}
+                  multimultiline={true}
+                  numberOfLines={2}>
+                  {item.description}
+                </Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Bandas: </Text>
+                <Text
+                  multimultiline={true}
+                  numberOfLines={2}
+                  style={css.description}>
+                  {/* {item.banda1}, {item.banda2} */}
+                </Text>
+              </View>
+            </View>
+            <View style={css.buttons}>
+              <TouchableOpacity
+                style={css.button}
+                onPress={() => navigation.navigate('SelecaoBanda')}>
+                <Text style={css.buttonText}>Candidatar-se</Text>
+              </TouchableOpacity>
+              {/* <TouchableOpacity
               style={css.button}
               onPress={() => navigation.navigate('Avaliacao')}>
               <Text style={css.buttonText}>Avaliar</Text>
             </TouchableOpacity> */}
+            </View>
           </View>
+        </View>
+      );
+    };
+    return (
+      <View style={css.containerList}>
+        <Text style={css.title}>Eventos disponíveis</Text>
+        <View style={css.scroll}>
+          <FlatList
+            removeClippedSubviews={false}
+            data={concerts}
+            renderItem={EventoBanda}
+            keyExtractor={item => item.id}></FlatList>
         </View>
       </View>
     );
-  };
-  return (
-    <View style={css.containerList}>
-      <Text style={css.title}>Eventos disponíveis</Text>
-      <View style={css.scroll}>
-        <FlatList
-          removeClippedSubviews={false}
-          data={eventos_mock}
-          renderItem={EventoBanda}
-          keyExtractor={item => item.id}></FlatList>
-      </View>
-    </View>
-  );
-}
-if (user.provider) {
-  const EventoEstabelecimento = ({item}) => {
-    return (
-      <View>
-        <View style={css.icons}>
-        <View style={css.iconMaps2}>
-            <Icon
-              name={'locate'}
-              size={16}
-              color={'#FF6400'}
-              onPress={() => navigation.navigate('Maps')}
-            />
-          </View>
-        </View>
-        <View style={css.card}>
-          <View style={css.content}>
-            <View style={css.rows}>
-              <Text style={css.label}>Evento: </Text>
-              <Text style={css.tittle}>{item.titulo}</Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Estabelecimento: </Text>
-              <Text
-                multimultiline={true}
-                numberOfLines={2}
-                style={css.tittle}>
-                {item.estabelecimento}
-              </Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Data: </Text>
-              <Text style={css.description}>{item.data}</Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Descrição: </Text>
-              <Text
-                style={css.description}
-                multimultiline={true}
-                numberOfLines={2}>
-                {item.descricao}
-              </Text>
-            </View>
-            <View style={css.rows}>
-              <Text style={css.label}>Bandas: </Text>
-              <Text
-                multimultiline={true}
-                numberOfLines={2}
-                style={css.description}>
-                {item.banda1}, {item.banda2}
-              </Text>
+  }
+  if (user.provider) {
+    const EventoEstabelecimento = ({ item }) => {
+      return (
+        <View>
+          <View style={css.icons}>
+            <View style={css.iconMaps2}>
+              <Icon
+                name={'locate'}
+                size={16}
+                color={'#FF6400'}
+                onPress={() => navigation.navigate('Maps')}
+              />
             </View>
           </View>
-          <View style={css.buttons}>
-            {/* <TouchableOpacity
+          <View style={css.card}>
+            <View style={css.content}>
+              <View style={css.rows}>
+                <Text style={css.label}>Evento: </Text>
+                <Text style={css.tittle}>{item.name}</Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Estabelecimento: </Text>
+                <Text
+                  multimultiline={true}
+                  numberOfLines={2}
+                  style={css.tittle}>
+                  {item.name}
+                </Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Data: </Text>
+                <Text style={css.description}>{item.date}</Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Descrição: </Text>
+                <Text
+                  style={css.description}
+                  multimultiline={true}
+                  numberOfLines={2}>
+                  {item.description}
+                </Text>
+              </View>
+              <View style={css.rows}>
+                <Text style={css.label}>Bandas: </Text>
+                <Text
+                  multimultiline={true}
+                  numberOfLines={2}
+                  style={css.description}>
+                  {/* {item.banda1}, {item.banda2} */}
+                </Text>
+              </View>
+            </View>
+            <View style={css.buttons}>
+              {/* <TouchableOpacity
               style={css.button}
               onPress={() => navigation.navigate('SelecaoBanda')}>
               <Text style={css.buttonText}>Selecionar bandas</Text>
@@ -193,32 +200,32 @@ if (user.provider) {
               onPress={() => navigation.navigate('Avaliacao')}>
               <Text style={css.buttonText}>Avaliar bandas</Text>
             </TouchableOpacity>*/}
-          </View> 
+            </View>
+          </View>
+        </View>
+      );
+    };
+    return (
+      <View style={css.containerList}>
+        <Text style={css.title}>Eventos disponíveis</Text>
+        <View style={css.scroll}>
+          <FlatList
+            removeClippedSubviews={false}
+            data={concerts}
+            renderItem={EventoEstabelecimento}
+            keyExtractor={item => item.id}></FlatList>
         </View>
       </View>
     );
-  };
-  return (
-    <View style={css.containerList}>
-      <Text style={css.title}>Eventos disponíveis</Text>
-      <View style={css.scroll}>
-        <FlatList
-          removeClippedSubviews={false}
-          data={eventos_mock}
-          renderItem={EventoEstabelecimento}
-          keyExtractor={item => item.id}></FlatList>
+  } else {
+    return (
+      <View>
+        <View style={css.error}>
+          <ActivityIndicator size="large" color="#FF7306" />
+        </View>
       </View>
-    </View>
-  );
-} else {
-  return (
-    <View>
-      <View style={css.error}>
-        <ActivityIndicator size="large" color="#FF7306" />
-      </View>
-    </View>
-  );
-}
+    );
+  }
 };
 
 const css = StyleSheet.create({

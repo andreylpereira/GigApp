@@ -12,33 +12,28 @@ import {
 } from 'react-native';
 
 import DatePicker from 'react-native-datepicker';
-import api from '../../services/api';
+import services from '../../services/services';
+import { useAuth } from '../../context/auth';
 
 const CadastroEvento = ({ navigation }) => {
 
+  const { user, token } = useAuth();
   const [nomeEvento, setNomeEvento] = useState('');
   const [descricaoEvento, setDescricaoEvento] = useState('');
   const [valorEvento, setValorEvento] = useState('');
-  const [dataInicial, setDataInicial] = useState(new Date());
-  const dataEvento = dataInicial;
+  const [dataInicial, setDataInicial] = useState(new Date());  
+  const dataEvento = dataInicial;   
 
   //fazer validações
   const createEvento = async () => {
     if (nomeEvento && descricaoEvento && valorEvento && dataEvento) {
-      try {
-        const response = await api.post('/concerts',
-          {
-            "name": nomeEvento,
-            "description": descricaoEvento,
-            "date": dataEvento,
-            "ticketPrice": valorEvento
-          });
-        console.log("concert created successfully!!")
-        console.log(JSON.stringify(response.data));
-
-      } catch (error) {
-        console.log('Impossible to create concerts ' + error);
+      const data = {        
+        nomeEvento,
+        descricaoEvento,
+        valorEvento,
+        dataEvento
       }
+      await services.postConcerts(data, token);
     } else {
       console.log('Vazio');
     }
