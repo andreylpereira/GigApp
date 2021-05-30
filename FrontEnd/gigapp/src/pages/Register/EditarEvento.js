@@ -45,7 +45,7 @@ const EditarEvento = ({navigation}) => {
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
       <KeyboardAvoidingView style={css.container}>
-        <Text style={css.tittle}>Criar Evento</Text>
+        <Text style={css.tittle}>Editar Evento</Text>
 
         <TextInput
           style={css.input}
