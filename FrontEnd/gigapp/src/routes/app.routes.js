@@ -10,9 +10,7 @@ import SelecaoBanda from '../pages/Register/SelecaoBanda';
 import EditarEvento from '../pages/Register/EditarEvento';
 import Maps from '../pages/Dashboards/Maps';
 
-
 import {createStackNavigator} from '@react-navigation/stack';
-
 
 const AppStack = createStackNavigator();
 
