@@ -80,18 +80,29 @@ const Evento = ({ navigation }) => {
   const [concerts, setConcerts] = useState([]);
   const { user, token } = useAuth();
 
+  async function handleDelete(id, token) {
+    console.log(id);
+    try {
+      await services.deleteConcerts(id, token)
+
+    } catch (error) {
+      console.log('deu ruim ', error);
+    }    
+  }
+
   useEffect(async () => {
     const concerts = await services.getConcerts();
     setConcerts(concerts);
-  }, []); 
+
+  }, [concerts]);
 
   if (!user.provider) {
-    const EventoBanda = ({item}) => {
+    const EventoBanda = ({ item }) => {
 
       return (
         <View>
           <View style={css.icons}>
-          <View style={css.iconMaps2}>
+            <View style={css.iconMaps2}>
               <Icon
                 name={'locate'}
                 size={16}
@@ -196,7 +207,12 @@ const Evento = ({ navigation }) => {
               />
             </View>
             <View style={css.iconDelete}>
-              <Icon name={'trash-bin'} size={16} color={'#FF6400'} />
+              <Icon
+                name={'trash-bin'}
+                size={16}
+                color={'#FF6400'}
+                onPress={() => handleDelete(item.id, token)}
+              />
             </View>
           </View>
           <View style={css.card}>
@@ -211,7 +227,7 @@ const Evento = ({ navigation }) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.tittle}>
-                  {item.name}
+                  {item.id}
                 </Text>
               </View>
               <View style={css.rows}>
