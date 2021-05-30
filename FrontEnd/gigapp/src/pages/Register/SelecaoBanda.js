@@ -7,38 +7,40 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const SelecaoBanda = ({navigation}) => {
   const eventos_mock = [
     {
+      
       id: 1,
       nome: 'The Strokes',
       estilo: 'indie-rock',
       nota: '10,0',
-      image: "'../../assets/fotos/redlights.jpg'",
+      image: require('../../assets/fotos/redlights.jpg'),
     },
     {
       id: 2,
       nome: 'Arctic Monkeys',
       estilo: 'indie',
       nota: '9,0',
-      image: "'../../assets/fotos/redlights.jpg'",
+      image: require('../../assets/fotos/alcala.jpg'),
     },
     {
       id: 3,
       nome: 'The Queens of Stone Age',
       estilo: 'rock',
       nota: '8,0',
-      image: "'../../assets/fotos/redlights.jpg'",
+      image: require('../../assets/fotos/dazaranha.jpg'),
     },
     {
       id: 4,
       nome: 'Massacration',
       estilo: 'Metal of Gods',
       nota: '7,0',
-      image: "'../../assets/fotos/redlights.jpg'",
+      image: require('../../assets/fotos/underdogs.jpg'),
     },
   ];
 
   const {user} = useAuth();
 
   const SelecionarBanda = ({item}) => {
+    
     return (
       <View>
         <View style={css.card}>
@@ -49,7 +51,7 @@ const SelecaoBanda = ({navigation}) => {
                   <Image
                     style={css.image}
                     resizeMode="cover"
-                    source={require('../../assets/fotos/redlights.jpg')}
+                    source={item.image}
                   />
                 </View>
                 <View style={{alignSelf: 'center'}}>

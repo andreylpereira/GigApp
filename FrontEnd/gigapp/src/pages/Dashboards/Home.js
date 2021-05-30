@@ -7,45 +7,45 @@ import {useAuth} from '../../context/auth';
 
 const Home = ({navigation}) => {
 
-const eventos_mock = [
-  {
-    id: 1,
-    titulo: 'Show do Daza',
-    estabelecimento: 'John Bull',
-    data: '24/10/1950',
-    descricao: 'das dasd asd',
-    banda1: 'faf a2',
-    banda2: 'd gsgs',
-  },
-  {
-    id: 2,
-    titulo: '142131 asda',
-    estabelecimento: ' asd22',
-    data: '25/10/1950',
-    descricao: ' gdfgdf',
-    banda1: ' dfgd2',
-    banda2: ' sdasd',
-  },
-  {
-    id: 3,
-    titulo: 'Teste2',
-    estabelecimento: 'Celulsdfsda',
-    data: '26/10/1950',
-    descricao: 'Último shsdfsdfsdw do Strokes nessa bagaça teste',
-    banda1: 'Strokdsfsdfes',
-    banda2: 'AfdsfsdfM',
-  },
-  {
-    id: 4,
-    titulo: 'teste4',
-    estabelecimento: 'Celula',
-    data: '27/10/1950',
-    descricao: 'Úgfgfça',
-    banda1: 'Stroke331s',
-    banda2: 'AM2131',
-  },
-];
-
+  const eventos_mock = [
+    {
+      id: 1,
+      titulo: 'Show do Daza',
+      estabelecimento: 'John Bull',
+      data: '30/05/2021',
+      descricao: 'Show de aniversario do dazaranha, entrada em dobro',
+      banda1: 'Dazaranha',
+      banda2: 'Amigos do Daza',
+    },
+    {
+      id: 2,
+      titulo: 'Show do John Bala Jones',
+      estabelecimento: 'Chopp do Gus',
+      data: '30/05/2021',
+      descricao: 'Chop em dobro',
+      banda1: ' John Bala Jones',
+      banda2: 'Outros',
+    },
+    {
+      id: 3,
+      titulo: 'Teste2',
+      estabelecimento: 'Chopp do Gus',
+      data: '30/05/2021',
+      descricao: 'Chop em dobro com classicos do rock',
+      banda1: 'The Beatles',
+      banda2: 'Oasis',
+    },
+    {
+      id: 4,
+      titulo: 'Show indie',
+      estabelecimento: 'Celula',
+      data: '30/05/2021',
+      descricao: 'Show indie com AM e Strokes',
+      banda1: 'Artic Monkeys',
+      banda2: 'The Strokes',
+    },
+  ];
+  
 const [eventos, setEventos] = useState(eventos_mock);
 const {user} = useAuth();
 
