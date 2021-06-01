@@ -27,8 +27,18 @@ class Services {
         }
     };
 
+    async getConcertsById(id) {
+        try {
+            const response = await api.get(`/concerts/${id}`);
+            //console.log(JSON.stringify(response.data));
+            return response.data;
+        } catch (error) {
+            console.log('Cannot get concerts ', error);
+        }
+    };
+
     async postConcerts(data, token) {
-        try {            
+        try {
             const response = await api.post('/concerts',
                 {
                     name: data.nomeEvento,
@@ -49,11 +59,32 @@ class Services {
         }
     }
 
-    async updateConcerts() { }
+    async updateConcerts(data, token) {
+        console.log(data, token)
+        try {
+            const response = await api.put(`/concerts/${data.id}`,
+                {
+                    name: data.nomeEvento,
+                    description: data.descricaoEvento,
+                    date: data.dataInicial,
+                    ticketPrice: data.valorEvento
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+            console.log("Concert update successfully!!")
+            console.log(JSON.stringify(response.data));
+            return response.data;
+        } catch (error) {
+            console.log('Cannot update concert', error);
+        }
+    }
 
-    async deleteConcerts(id, token) {         
-        try {            
-            const response = await api.delete(`/concerts/${id}`,                
+    async deleteConcerts(id, token) {
+        try {
+            const response = await api.delete(`/concerts/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -65,7 +96,7 @@ class Services {
         } catch (error) {
             console.log('Cannot delete concert', error);
         }
-    }    
+    }
 }
 
 export default new Services();

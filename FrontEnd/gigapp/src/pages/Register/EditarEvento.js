@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
   StatusBar,
@@ -12,28 +12,30 @@ import {
 } from 'react-native';
 
 import DatePicker from 'react-native-datepicker';
+import services from '../../services/services';
+import { useAuth } from '../../context/auth';
 
-const EditarEvento = ({navigation}) => {
-  const [nomeEvento, setNomeEvento] = useState('');
-  const [descricaoEvento, setDescricaoEvento] = useState('');
-  const [valorEvento, setValorEvento] = useState('');
-  const [dataInicial, setDataInicial] = useState(new Date());
-  const dataLista = dataInicial;
+const EditarEvento = ({ route, navigation }) => {
 
-  //fazer validações
-  const createEvento = async () => {
-    if (nomeEvento && descricaoEvento && valorEvento && dataLista) {
-      try {
-        // const response = await api.post('/novasTarefas', { "nome": nomeLista, "descricao": descricaoLista, "data": dataLista });
-        // console.log(JSON.stringify(response.data));
-        console.log(nomeEvento);
-        console.log(descricaoEvento);
-        console.log(valorEvento);
-        console.log(dataLista);
-        console.log(idExemplo);
-      } catch (error) {
-        console.log('DEU RUIM' + error);
-      }
+  const id = route.params.item.id; 
+  
+  const { user, token } = useAuth();
+  
+  const [nomeEvento, setNomeEvento] = useState(route.params.item.name);
+  const [descricaoEvento, setDescricaoEvento] = useState(route.params.item.description);
+  const [valorEvento, setValorEvento] = useState(route.params.item.ticketPrice);
+  const [dataInicial, setDataInicial] = useState(route.params.item.date);  
+
+  const updateConcert = async () => {
+    if (nomeEvento && descricaoEvento && valorEvento && dataInicial) {
+      const data = {
+        id,
+        nomeEvento,
+        descricaoEvento,
+        valorEvento,
+        dataInicial
+      }      
+      await services.updateConcerts(data, token);
     } else {
       console.log('Vazio');
     }
@@ -45,7 +47,7 @@ const EditarEvento = ({navigation}) => {
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
       <KeyboardAvoidingView style={css.container}>
-        <Text style={css.tittle}>Criar Evento</Text>
+        <Text style={css.tittle}>Editar Evento</Text>
 
         <TextInput
           style={css.input}
@@ -93,7 +95,7 @@ const EditarEvento = ({navigation}) => {
           }}
         />
 
-        <TouchableOpacity style={css.button} onPress={() => createEvento()}>
+        <TouchableOpacity style={css.button} onPress={() => updateConcert()}>
           {/* 
           style={css.button}
           onPress={() => navigation.goBack()}>   */}
@@ -103,6 +105,7 @@ const EditarEvento = ({navigation}) => {
     </>
   );
 };
+
 
 const css = StyleSheet.create({
   container: {
