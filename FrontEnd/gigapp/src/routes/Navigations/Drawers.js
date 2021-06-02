@@ -43,7 +43,7 @@ function Drawers() {
                   multimultiline={true}
                   numberOfLines={1}
                   style={css.personName}>
-                  Dazaranha
+                  {user?.name}
                 </Text>
                 <Text
                   multimultiline={true}
@@ -89,7 +89,7 @@ function Drawers() {
                   multimultiline={true}
                   numberOfLines={1}
                   style={css.personName}>
-                  Chopp do Gus
+                  {user?.name}
                 </Text>
                 <Text
                   multimultiline={true}
