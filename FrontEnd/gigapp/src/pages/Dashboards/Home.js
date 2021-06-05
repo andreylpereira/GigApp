@@ -56,6 +56,19 @@ const Home = ({ navigation }) => {
     
   }, [concerts]);
 
+  //insert band (candidatar-se)
+  async function handleInsert(id, token) {
+    console.log(id);
+    try {
+      await services.insertBandsInConcert(id, token)
+
+    } catch (error) {
+      console.log('deu ruim ', error);
+    }
+  }
+//=============================================
+
+
   if (!user.provider) {
     const EventoBanda = ({ item }) => {
       return (
@@ -111,7 +124,7 @@ const Home = ({ navigation }) => {
             <View style={css.buttons}>
               <TouchableOpacity
                 style={css.button}
-                onPress={() => navigation.navigate('SelecaoBanda')}>
+                onPress={() => handleInsert}>
                 <Text style={css.buttonText}>Candidatar-se</Text>
               </TouchableOpacity>
               {/* <TouchableOpacity

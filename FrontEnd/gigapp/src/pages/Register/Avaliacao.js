@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useAuth} from '../../context/auth';
 import {Picker} from '@react-native-picker/picker';
+import services from '../../services/services';
 
 import {
   StatusBar,
@@ -12,7 +13,7 @@ import {
 } from 'react-native';
 
 const Avaliacao = ({navigation}) => {
-  const {user} = useAuth();
+  const { user, token } = useAuth();
 
   const [evento] = useState([
     'selecione a nota',
@@ -46,6 +47,37 @@ const Avaliacao = ({navigation}) => {
     navigation.goBack();
   };
 
+
+//====================================//
+
+  
+
+  //funções base para avaliar Bands
+  async function handleRatingBands(id, token) {
+    console.log(id);
+    try {
+      await services.ratingBands(id, token)
+
+    } catch (error) {
+      console.log('deu ruim ', error);
+    }
+  }
+
+
+  //funções base para avaliar Venues
+  async function handleRatingVenues(id, token) {
+    console.log(id);
+    try {
+      await services.ratingVenues(id, token)
+
+    } catch (error) {
+      console.log('deu ruim ', error);
+    }
+  }
+
+
+//===============================================//  
+
   if(!user.provider) {
     return (
       <>
@@ -68,7 +100,7 @@ const Avaliacao = ({navigation}) => {
               })}
             </Picker>
           </View>
-          <TouchableOpacity style={css.button} onPress={() => avaliarEvento()}>
+          <TouchableOpacity style={css.button} onPress={() => handleRatingVenues}>
             <Text style={css.buttonText}>Avaliar</Text>
           </TouchableOpacity>
         </View>
@@ -98,7 +130,7 @@ const Avaliacao = ({navigation}) => {
               })}
             </Picker>
           </View>
-          <TouchableOpacity style={css.button} onPress={() => avaliarEvento()}>
+          <TouchableOpacity style={css.button} onPress={handleRatingBands}>
             <Text style={css.buttonText}>Avaliar</Text>
           </TouchableOpacity>
         </View>

@@ -3,6 +3,8 @@ import {useAuth} from '../../context/auth';
 import {FlatList} from 'react-native';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import services from '../../services/services';
+
 
 const SelecaoBanda = ({navigation}) => {
   const eventos_mock = [
@@ -65,10 +67,28 @@ const SelecaoBanda = ({navigation}) => {
     },
   ];
 
-  const {user} = useAuth();
+
+  const { user, token } = useAuth();
+
+  async function handleSelect(id, token) {
+    console.log(id);
+    try {
+      await services.deleteConcerts(id, token)
+
+    } catch (error) {
+      console.log('deu ruim ', error);
+    }
+  }
+
+  useEffect(async () => {
+    const concerts = await services.getConcerts();
+    setConcerts(concerts);
+
+  }, [concerts]);
+
 
   const SelecionarBanda = ({item}) => {
-    
+
     return (
       <View>
         <View style={css.card}>
@@ -106,7 +126,7 @@ const SelecaoBanda = ({navigation}) => {
           <View style={css.buttons}>
             <TouchableOpacity
               style={css.button}
-              onPress={() => navigation.navigate('Avaliacao')}>
+              onPress={() => handleSelect}>
               <Text style={css.buttonText}>Selecionar</Text>
             </TouchableOpacity>
           </View>

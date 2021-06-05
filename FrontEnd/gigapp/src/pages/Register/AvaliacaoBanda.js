@@ -4,6 +4,7 @@ import {FlatList} from 'react-native';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+
 const AvaliacaoBanda = ({navigation}) => {
   const eventos_mock = [
     {
@@ -65,7 +66,7 @@ const AvaliacaoBanda = ({navigation}) => {
     },
   ];
 
-  const {user} = useAuth();
+  const { user, token } = useAuth();
 
   const AvaliarBanda = ({item}) => {
     return (
@@ -105,7 +106,8 @@ const AvaliacaoBanda = ({navigation}) => {
           <View style={css.buttons}>
             <TouchableOpacity
               style={css.button}
-              onPress={() => navigation.navigate('Avaliacao')}>
+              // add  o ",{item}" após navigate('Avaliacao') 
+              onPress={() => navigation.navigate('Avaliacao'), { item }}>
               <Text style={css.buttonText}>Avaliar</Text>
             </TouchableOpacity>
           </View>
