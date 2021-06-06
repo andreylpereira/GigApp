@@ -13,18 +13,22 @@ class ConcertController {
                 return res.status(400).json({ error: 'Validation fails' });
             }
 
+            //const { venue_id } = req.params;
+
             const concertExists = await Concert.findOne({ where: { name: req.body.name } });
             if (concertExists) {
                 return res.status(400).json({ error: 'Concert already exists.' });
             }
 
-            const { id, name, description, date, ticketPrice } = await Concert.create(req.body);
+            const { id, name, description, date, ticketPrice, band_id, venue_id } = await Concert.create(req.body);
             return res.json({
                 id,
                 name,
                 description,
                 date,
-                ticketPrice
+                ticketPrice, 
+                band_id,
+                venue_id
             });
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });

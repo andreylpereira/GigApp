@@ -18,6 +18,11 @@ class DataBase {
 
         models.map(model => model.init(this.connection));
     }
+    associate() {
+        this.connection = new Sequelize(DatabaseConfig);
+
+        models.map(model => model.associate(this.connection.models));
+    }
 }
 
 export default new DataBase();

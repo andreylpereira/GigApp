@@ -27,8 +27,8 @@ routes.post('/users', UserController.store);
 routes.get('/bands', BandController.show);
 routes.post('/bands', BandController.store);
 
-// routes.get('/venues', VenueController.show);
-// routes.post('/venues', VenueController.store);
+routes.get('/venues', VenueController.show);
+routes.post('/venues', VenueController.store);
 
 routes.get('/concerts', ConcertController.show);
 routes.post('/concerts', AuthMiddleware, ConcertController.store);
@@ -47,6 +47,6 @@ routes.post('/sessions', SessionController.store);
 //routes.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 routes.put('/users', AuthMiddleware, UserController.update);
 routes.put('/bands/:id', AuthMiddleware, BandController.update);
-routes.put('/venues/:id', AuthMiddleware, VenueController.update);
+//routes.put('/venues/:id', AuthMiddleware, VenueController.update);
 
 export default routes;

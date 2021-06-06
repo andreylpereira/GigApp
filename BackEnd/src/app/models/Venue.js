@@ -36,7 +36,7 @@ class Venue extends Model {
     return bcrypt.compare(password, this.password_hash);
   }
   static associate(models) {
-    this.hasMany(models.Concert, { foreignKey: 'venue_id', as: 'concert' });
+    this.hasMany(models.Concert, { foreignKey: 'venue_id', as: 'concerts' });
   }
 }
 
