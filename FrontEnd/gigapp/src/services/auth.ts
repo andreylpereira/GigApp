@@ -20,7 +20,7 @@
 //                     //deixar igual ao session do back
 //                     name: 'Andrey Luiz',
 //                     provider: true,
-//                     email: 'gigapp@gmail.com',
+//                     email: 'gigapp@gmail.com', //banda@gmail.com
 //                     password: 'teste123'
 //                 },
 //             })

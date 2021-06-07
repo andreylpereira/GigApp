@@ -351,7 +351,7 @@ const Maps = ({navigation}) => {
                           <Image
                             style={css.image}
                             resizeMode="cover"
-                            source={require('../../assets/fotos/underdogs.jpg')}
+                            source={{uri: 'http://crashtv.com.br/site/wp-content/uploads/zf-hvvgc.jpg'}}
                           />
                         </Text>
 
@@ -419,7 +419,7 @@ const Maps = ({navigation}) => {
                           <Image
                             style={css.image}
                             resizeMode="cover"
-                            source={require('../../assets/fotos/redlights.jpg')}
+                            source={{uri: 'https://i.ytimg.com/vi/6dtF7NhJDvA/maxresdefault.jpg'}}
                           />
                         </Text>
 

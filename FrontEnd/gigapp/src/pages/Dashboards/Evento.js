@@ -141,7 +141,7 @@ const Evento = ({ navigation }) => {
                 name={'pencil-outline'}
                 size={16}
                 color={'#FF6400'}
-                onPress={() => navigation.navigate('EditarEvento', { item })}
+                onPress={() => navigation.navigate('EditarEvento')}
               />
             </View>
             <View style={css.iconDelete}>

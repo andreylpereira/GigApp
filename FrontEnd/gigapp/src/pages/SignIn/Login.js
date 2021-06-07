@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -9,31 +9,46 @@ import {
   Animated,
   KeyboardAvoidingView,
   Keyboard,
-  Image,
+  Alert,
 } from 'react-native';
 
-import { useAuth } from '../../context/auth';
+import {useAuth} from '../../context/auth';
 
-const Login = ({ navigation }) => {
-  const { signed, user, signIn, signOut } = useAuth();
+const Login = ({navigation}) => {
+  const {signed, user, signIn, signOut} = useAuth();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   //console.log(signed);
-  //console.log(user);  
+  //console.log(user);
   //signOut();
 
   async function handleSignIn() {
-    try {      
-      signIn(email, password);      
-    } catch (error) {
-      console.log('deu ruim ', error);
+    if (email == null || password == null) {
+      Alert.alert(
+        'E-mail e/ou password em branco(s) !',
+        'Favor preencher todos os campos.',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+      );
+    } else {
+      try {
+        signIn(email, password);
+      } catch (error) {
+        console.log('deu ruim ', error);
+      }
     }
   }
 
-  const [offset] = useState(new Animated.ValueXY({ x: 0, y: 80 }));
+  const [offset] = useState(new Animated.ValueXY({x: 0, y: 80}));
   const [opacity] = useState(new Animated.Value(0));
-  const [logo] = useState(new Animated.ValueXY({ x: 220, y: 220 }));
+  const [logo] = useState(new Animated.ValueXY({x: 220, y: 220}));
 
   useEffect(() => {
     keyboardDidShowListener = Keyboard.addListener(
@@ -96,7 +111,7 @@ const Login = ({ navigation }) => {
       <KeyboardAvoidingView style={css.container}>
         <View>
           <Animated.Image
-            style={{ width: logo.x, height: logo.y }}
+            style={{width: logo.x, height: logo.y}}
             source={require('../../assets/imagens/logo.png')}
           />
 
@@ -105,7 +120,7 @@ const Login = ({ navigation }) => {
         <Animated.View
           style={{
             opacity: opacity,
-            transform: [{ translateY: offset.y }],
+            transform: [{translateY: offset.y}],
           }}>
           <TextInput
             style={css.input}
