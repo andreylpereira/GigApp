@@ -30,6 +30,8 @@ routes.post('/bands', BandController.store);
 routes.get('/venues', VenueController.show);
 routes.post('/venues', VenueController.store);
 
+routes.get('/venues/:venue_id/concerts', ConcertController.index);
+
 routes.get('/concerts', ConcertController.show);
 routes.post('/concerts', AuthMiddleware, ConcertController.store);
 routes.get('/concerts/:id', ConcertController.showWithId);

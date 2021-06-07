@@ -1,5 +1,6 @@
 import Concert from '../models/Concert';
 import * as Yup from 'yup';
+import Venue from '../models/Venue';
 
 class ConcertController {
     async store(req, res) {
@@ -26,7 +27,7 @@ class ConcertController {
                 name,
                 description,
                 date,
-                ticketPrice, 
+                ticketPrice,
                 band_id,
                 venue_id
             });
@@ -40,7 +41,7 @@ class ConcertController {
 
         try {
             const { name, description, date, ticketPrice } = req.body;
-            const concert = await Concert.findByPk(req.params.id);            
+            const concert = await Concert.findByPk(req.params.id);
 
             if (name !== concert.name) {
                 const concertExists = await Concert.findOne({
@@ -108,6 +109,26 @@ class ConcertController {
             console.log(concerts);
         } catch (error) {
             res.status(500).send({ message: 'Failel to delete the concert!', error });
+        }
+    }
+
+    async index(req, res) {
+
+        try {
+            const { venue_id } = req.params;
+
+            const venue = await Venue.findByPk(venue_id, {
+                include: { association: 'concerts' }
+            });
+            if (!venue) {
+                return res.status(400).json({ error: 'Venue does not exist.' });
+            }
+
+            return res.json(venue);
+
+        } catch (error) {
+            res.status(500).send({ message: 'An error occurred ' + error });
+            console.log(error);
         }
     }
 }
