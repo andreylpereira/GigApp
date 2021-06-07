@@ -31,9 +31,10 @@ routes.get('/venues', VenueController.show);
 routes.post('/venues', VenueController.store);
 
 routes.get('/venues/:venue_id/concerts', ConcertController.index);
+routes.post('/venues/:venue_id/concerts', ConcertController.store);
 
 routes.get('/concerts', ConcertController.show);
-routes.post('/concerts', AuthMiddleware, ConcertController.store);
+//routes.post('/concerts', AuthMiddleware, ConcertController.store);
 routes.get('/concerts/:id', ConcertController.showWithId);
 routes.delete('/concerts/:id', AuthMiddleware, ConcertController.delete);
 routes.put('/concerts/:id', AuthMiddleware, ConcertController.update);

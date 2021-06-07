@@ -19,7 +19,7 @@ class Concert extends Model {
 
   static associate(models) {
     this.belongsTo(models.Venue, { foreignKey: 'venue_id', as: 'venue' });
-    //this.belongsToMany(models.Band, { foreignKey: 'band_id', as: 'bands' });
+    this.belongsToMany(models.Band, { foreignKey: 'band_id', through: 'concert_bands', as: 'bands' });
   }
 }
 

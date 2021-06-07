@@ -1,8 +1,9 @@
 import Concert from '../models/Concert';
-import * as Yup from 'yup';
 import Venue from '../models/Venue';
+import * as Yup from 'yup';
 
 class ConcertController {
+
     async store(req, res) {
 
         try {
@@ -14,23 +15,31 @@ class ConcertController {
                 return res.status(400).json({ error: 'Validation fails' });
             }
 
-            //const { venue_id } = req.params;
+            const { venue_id } = req.params;
+            const { name, description, date, ticketPrice, band_id } = req.body;
+
+            const venue = await Venue.findByPk(venue_id);
+
+            if (!venue) {
+                return res.status(400).json({ error: 'Venue not found' });
+            }
 
             const concertExists = await Concert.findOne({ where: { name: req.body.name } });
             if (concertExists) {
                 return res.status(400).json({ error: 'Concert already exists.' });
             }
 
-            const { id, name, description, date, ticketPrice, band_id, venue_id } = await Concert.create(req.body);
-            return res.json({
-                id,
+            const concert = await Concert.create({
                 name,
                 description,
                 date,
                 ticketPrice,
+                venue_id,
                 band_id,
-                venue_id
             });
+
+            return res.json(concert);
+
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });
             console.log(error);
@@ -120,6 +129,7 @@ class ConcertController {
             const venue = await Venue.findByPk(venue_id, {
                 include: { association: 'concerts' }
             });
+
             if (!venue) {
                 return res.status(400).json({ error: 'Venue does not exist.' });
             }
