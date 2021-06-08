@@ -107,7 +107,7 @@ const AvaliacaoBanda = ({navigation}) => {
             <TouchableOpacity
               style={css.button}
               // add  o ",{item}" após navigate('Avaliacao') 
-              onPress={() => navigation.navigate('Avaliacao'), { item }}>
+              onPress={() => navigation.navigate('Avaliacao')}>
               <Text style={css.buttonText}>Avaliar</Text>
             </TouchableOpacity>
           </View>

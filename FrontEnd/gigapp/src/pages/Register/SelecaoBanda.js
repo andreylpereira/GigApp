@@ -80,11 +80,11 @@ const SelecaoBanda = ({navigation}) => {
     }
   }
 
-  useEffect(async () => {
-    const concerts = await services.getConcerts();
-    setConcerts(concerts);
+  // useEffect(async () => {
+  //   const concerts = await services.getConcerts();
+  //   setConcerts(concerts);
 
-  }, [concerts]);
+  // }, [concerts]);
 
 
   const SelecionarBanda = ({item}) => {
