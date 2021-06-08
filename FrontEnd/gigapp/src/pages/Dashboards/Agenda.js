@@ -108,7 +108,7 @@ const Agenda = ({navigation}) => {
                 </Text>
               </View>
               <View style={css.rows}>
-                <Text style={css.label}>Bandas: </Text>
+                <Text style={css.label}>Banda: </Text>
                 <Text
                   multimultiline={true}
                   numberOfLines={2}
@@ -200,7 +200,7 @@ const Agenda = ({navigation}) => {
                 </Text>
               </View>
               <View style={css.rows}>
-                <Text style={css.label}>Bandas: </Text>
+                <Text style={css.label}>Banda: </Text>
                 <Text
                   multimultiline={true}
                   numberOfLines={2}
@@ -213,12 +213,12 @@ const Agenda = ({navigation}) => {
               <TouchableOpacity
                 style={css.button}
                 onPress={() => navigation.navigate('SelecaoBanda')}>
-                <Text style={css.buttonText}>Selecionar bandas</Text>
+                <Text style={css.buttonText}>Selecionar Banda</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={css.button}
                 onPress={() => navigation.navigate('Avaliacao')}>
-                <Text style={css.buttonText}>Avaliar bandas</Text>
+                <Text style={css.buttonText}>Avaliar Banda</Text>
               </TouchableOpacity>
             </View>
           </View>
