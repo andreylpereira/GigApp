@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
         console.log('deu ruim ', error);
       }
     }
-  }
+  }  
 
   const [offset] = useState(new Animated.ValueXY({x: 0, y: 80}));
   const [opacity] = useState(new Animated.Value(0));

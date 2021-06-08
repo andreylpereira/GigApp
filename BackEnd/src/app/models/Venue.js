@@ -14,9 +14,10 @@ class Venue extends Model {
         city: Sequelize.STRING,
         state: Sequelize.STRING,
         add: Sequelize.STRING,
-        rating: Sequelize.INTEGER,
-        lat: Sequelize.INTEGER,
-        long: Sequelize.INTEGER,
+        rating: Sequelize.DECIMAL(10,1),
+        lat: Sequelize.DOUBLE,
+        long: Sequelize.DOUBLE,
+        image: Sequelize.STRING,
       },
       {
         sequelize,
