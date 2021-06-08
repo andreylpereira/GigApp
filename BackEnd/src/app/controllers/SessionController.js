@@ -30,14 +30,16 @@ class SessionController {
                 return res.status(401).json({ error: 'User or Password does not match!' });
             }
 
-            const { id, name, provider } = user;
+            const { id, name, provider, rating, image } = user;
 
             return res.json({
                 user: {
                     id,
                     name,
                     email,
-                    provider,                    
+                    provider,
+                    rating,
+                    image,                    
                 },
                 token: jwt.sign({ id }, authConf.secret, { //acrescetar informações necessárias para o login.
                     expiresIn: authConf.expireIn,

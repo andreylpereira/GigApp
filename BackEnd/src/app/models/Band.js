@@ -13,9 +13,10 @@ class Band extends Model {
         phone: Sequelize.STRING,
         style: Sequelize.STRING,
         description: Sequelize.STRING,
-        rating: Sequelize.INTEGER,
-        lat: Sequelize.INTEGER,
-        long: Sequelize.INTEGER, 
+        rating: Sequelize.DECIMAL(10,1),
+        lat: Sequelize.DOUBLE,
+        long: Sequelize.DOUBLE,
+        image: Sequelize.STRING,
       },
       {
         sequelize,
@@ -35,8 +36,8 @@ class Band extends Model {
     return bcrypt.compare(password, this.password_hash);
   }
 
-  static associate(models) {    
-    this.belongsToMany(models.Concert, { foreignKey: 'band_id', as: 'concert' });
+  static associate(models) {
+    this.belongsToMany(models.Concert, { foreignKey: 'band_id', through: 'concert_bands', as: 'concerts' });
   }
 }
 

@@ -7,7 +7,7 @@ import services from '../services/services';
 
 interface User {
   name: string;
-  email: string;
+  email: string;  
 }
 
 interface AuthContextData {
@@ -17,6 +17,8 @@ interface AuthContextData {
   signIn(): Promise<void>;
   signOut(): void;
   token: string | null;
+  rating: number;
+  image: string;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -68,6 +70,7 @@ export const AuthProvider = ({ children }) => {
       setToken(null);
     });
   }
+  
 
   return (
     <AuthContext.Provider value={{ signed: !!user, user, token, signIn, signOut }}>

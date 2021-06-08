@@ -24,12 +24,14 @@ class UserController {
                 return res.status(400).json({ error: 'User already exists.' });
             }
 
-            const { id, name, email, provider } = await User.create(req.body);
+            const { id, name, email, provider, rating, image } = await User.create(req.body);
             return res.json({
                 id,
                 name,
                 email,
-                provider
+                provider,
+                rating, 
+                image
             });
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });
@@ -99,6 +101,7 @@ class UserController {
 
         try {
             const users = await User.findAll();
+            //console.log(users)
             return res.json(users);
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });

@@ -21,6 +21,7 @@ const EditarEvento = ({ route, navigation }) => {
   
   const { user, token } = useAuth();
   
+  console.log(token)
   const [nomeEvento, setNomeEvento] = useState(route.params.item.name);
   const [descricaoEvento, setDescricaoEvento] = useState(route.params.item.description);
   const [valorEvento, setValorEvento] = useState(route.params.item.ticketPrice);

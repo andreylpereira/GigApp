@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('bands', {
+    return queryInterface.createTable('venues', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -24,31 +24,35 @@ module.exports = {
       },
       provider: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
         allowNull: false,
       },
       phone: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      style: {
+      city: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      description: {
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      add: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       rating: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10, 1),
         allowNull: false,
       },
       lat: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       long: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DOUBLE,
         allowNull: false,
       },
       image: {
@@ -67,6 +71,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('bands');
+    return queryInterface.dropTable('venues');
   },
 };

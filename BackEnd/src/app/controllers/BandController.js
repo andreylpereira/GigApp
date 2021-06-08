@@ -3,17 +3,26 @@ import Band from '../models/Band';
 class BandController {
     async store(req, res) {
         try {
+
+            const { name, email, password, phone, style, description, rating, lat, long, image } = req.body;
+
             const bandExists = await Band.findOne({ where: { email: req.body.email } });
             if (bandExists) {
                 return res.status(400).json({ error: 'Band already exists.' });
             }
-            const { id, name, email, provider } = await Band.create(req.body);
-            return res.json({
-                id,
+            const band = await Band.create({
                 name,
                 email,
-                provider
+                password,
+                phone,
+                style,
+                description,
+                rating,
+                lat,
+                long,
+                image,
             });
+            return res.json(band);
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });
             console.log(error);

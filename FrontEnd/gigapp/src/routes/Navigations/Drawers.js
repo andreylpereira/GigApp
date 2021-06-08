@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAuth} from '../../context/auth';
+import {useAuth, useState} from '../../context/auth';
 import {createDrawerNavigator, DrawerItemList} from '@react-navigation/drawer';
 import {
   StyleSheet,
@@ -21,6 +21,8 @@ const Drawer = createDrawerNavigator();
 function Drawers() {
   const {user, signOut} = useAuth();
 
+  //const{image, setImage} = useState(user.image);
+
   async function handleSignOut() {
     signOut();
   }
@@ -36,7 +38,7 @@ function Drawers() {
             <View style={css.personLogo}>
               <Image
                 style={css.image}
-                source={require('../../assets/fotos/dazaranha.jpg')}
+                source={{uri:user?.image}}
               />
               <View style={css.personDescription}>
                 <Text
@@ -52,7 +54,7 @@ function Drawers() {
                   Banda
                 </Text>
                 <View style={css.starLine}>
-                  <Text style={css.starLineText}>10,0</Text>
+                  <Text style={css.starLineText}>{user?.rating}</Text>
                   <Icon
                     name="star"
                     color={'#FCC51C'}
@@ -82,7 +84,7 @@ function Drawers() {
             <View style={css.personLogo}>
               <Image
                 style={css.image}
-                source={require('../../assets/fotos/chopp.jpg')}
+                source={{uri:user?.image}}
               />
               <View style={css.personDescription}>
                 <Text
@@ -98,7 +100,7 @@ function Drawers() {
                   Estabelecimento
                 </Text>
                 <View style={css.starLine}>
-                  <Text style={css.starLineText}>10,0</Text>
+                  <Text style={css.starLineText}>{user?.rating}</Text>
                   <Icon
                     name="star"
                     color={'#FCC51C'}

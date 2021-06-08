@@ -14,9 +14,10 @@ class Venue extends Model {
         city: Sequelize.STRING,
         state: Sequelize.STRING,
         add: Sequelize.STRING,
-        rating: Sequelize.INTEGER,
-        lat: Sequelize.INTEGER,
-        long: Sequelize.INTEGER,
+        rating: Sequelize.DECIMAL(10,1),
+        lat: Sequelize.DOUBLE,
+        long: Sequelize.DOUBLE,
+        image: Sequelize.STRING,
       },
       {
         sequelize,
@@ -36,7 +37,7 @@ class Venue extends Model {
     return bcrypt.compare(password, this.password_hash);
   }
   static associate(models) {
-    this.hasMany(models.Concert, { foreignKey: 'venue_id', as: 'concert' });
+    this.hasMany(models.Concert, { foreignKey: 'venue_id', as: 'concerts' });
   }
 }
 
