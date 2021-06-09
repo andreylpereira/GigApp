@@ -24,6 +24,16 @@ class Services {
     }
   }
 
+  async getConcertsByVenue(user) {
+    try {
+      const response = await api.get(`/venues/${user.id}/concerts`);
+      //console.log(JSON.stringify(response.data));
+      return response.data;
+    } catch (error) {
+      console.log('Cannot get concerts ', error);
+    }
+  }
+
   async getConcertsById(id) {
     try {
       const response = await api.get(`/concerts/${id}`);
@@ -34,10 +44,10 @@ class Services {
     }
   }
 
-  async postConcerts(data, token) {
+  async postConcerts(data, token, user) {
     try {
       const response = await api.post(
-        '/concerts',
+        `/venues/${user.id}/concerts`,
         {
           name: data.nomeEvento,
           description: data.descricaoEvento,
@@ -51,7 +61,7 @@ class Services {
         },
       );
       console.log('Concert created successfully!!');
-      console.log(JSON.stringify(response.data));
+      //console.log(JSON.stringify(response.data));
       return response.data;
     } catch (error) {
       console.log('Cannot created concert', error);

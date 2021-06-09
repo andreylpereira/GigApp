@@ -11,9 +11,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useAuth } from '../../context/auth';
 
-const Maps = ({ route, navigation }) => {
-
-  console.log(route);
+const MapsEventos = ({ route, navigation }) => {
+  
   
   const mapLightStyle = [
     {
@@ -316,8 +315,8 @@ const Maps = ({ route, navigation }) => {
             }}>
             <MapView.Marker
               coordinate={{
-                latitude: route.params.venue.lat,
-                longitude: route.params.venue.long,
+                latitude: route.params.lat,
+                longitude: route.params.long,
               }}
               image={require('../../assets/maps/drink.png')}
               title="teste"
@@ -328,8 +327,8 @@ const Maps = ({ route, navigation }) => {
                     <View style={css.gridColunm}>
                       <View style={{ alignSelf: 'center', marginBottom: 5 }}>
                         <View style={css.gridRow}>
-                          <Text style={css.mapTextTittle}>{route.params.venue.name}</Text>
-                          <Text style={css.note}>{route.params.venue.rating}</Text>
+                          <Text style={css.mapTextTittle}>{route.params.name}</Text>
+                          <Text style={css.note}>{route.params.rating}</Text>
                           <Icon
                             name="star"
                             color={'#FCC51C'}
@@ -354,7 +353,7 @@ const Maps = ({ route, navigation }) => {
                           <Image
                             style={css.image}
                             resizeMode="cover"
-                            source={{ uri: route.params.venue.image }}
+                            source={{ uri: route.params.image }}
                           />
                         </Text>
 
@@ -362,10 +361,10 @@ const Maps = ({ route, navigation }) => {
                           <Text
                             multimultiline={true}
                             style={css.mapTextDescription}>
-                              Endereço: {route.params.venue.add}
+                              Endereço: {route.params.add}
                           </Text>
                           <Text multimultiline={true} style={css.mapTextPhone}>
-                            Tel: {route.params.venue.phone}
+                            Tel: {route.params.phone}
                           </Text>
                         </View>
                       </View>
@@ -597,4 +596,4 @@ const css = StyleSheet.create({
   },
 });
 
-export default Maps;
+export default MapsEventos;

@@ -9,6 +9,7 @@ import AvaliacaoBanda from '../pages/Register/AvaliacaoBanda';
 import SelecaoBanda from '../pages/Register/SelecaoBanda';
 import EditarEvento from '../pages/Register/EditarEvento';
 import Maps from '../pages/Dashboards/Maps';
+import MapsEventos from '../pages/Dashboards/MapsEventos';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -124,6 +125,21 @@ const AppRoutes = () => (
     <AppStack.Screen
       name="Maps"
       component={Maps}
+      options={{
+        title: 'Mapa',
+        headerTitleStyle: {fontFamily: 'Nunito-Bold'},
+        headerTitleAlign: 'center',
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: '#FF7306',
+          borderBottomWidth: 1,
+          borderBottomColor: '#CDCCCE',
+        },
+      }}
+    />
+    <AppStack.Screen
+      name="MapsEventos"
+      component={MapsEventos}
       options={{
         title: 'Mapa',
         headerTitleStyle: {fontFamily: 'Nunito-Bold'},

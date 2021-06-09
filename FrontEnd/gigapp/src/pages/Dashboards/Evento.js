@@ -13,13 +13,12 @@ import { useAuth } from '../../context/auth';
 
 import services from '../../services/services';
 
-const Evento = ({ navigation }) => { 
+const Evento = ({ navigation }) => {
 
   const [concerts, setConcerts] = useState([]);
   const { user, token } = useAuth();
 
   async function handleDelete(id, token) {
-    console.log(id);
     try {
       await services.deleteConcerts(id, token)
 
@@ -29,10 +28,10 @@ const Evento = ({ navigation }) => {
   }
 
   useEffect(async () => {
-    const concerts = await services.getConcerts();
+    const concerts = await services.getConcertsByVenue(user);
     setConcerts(concerts);
 
-  }, [concerts]);
+  }, []);
 
   if (!user.provider) {
     const EventoBanda = ({ item }) => {
@@ -45,7 +44,7 @@ const Evento = ({ navigation }) => {
                 name={'locate'}
                 size={16}
                 color={'#FF6400'}
-                onPress={() => navigation.navigate('Maps')}
+                onPress={() => navigation.navigate('MapsEventos', concerts)}
               />
             </View>
           </View>
@@ -109,12 +108,12 @@ const Evento = ({ navigation }) => {
     };
     return (
       <View style={css.containerList}>
-        <Text style={css.title}>Seus eventos</Text>
+        <Text style={css.title}>Meus Eventos</Text>
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
             keyExtractor={(item) => item.id}
-            data={concerts}
+            data={concerts.concerts}
             renderItem={EventoBanda}
 
           />
@@ -133,7 +132,7 @@ const Evento = ({ navigation }) => {
                 name={'locate'}
                 size={16}
                 color={'#FF6400'}
-                onPress={() => navigation.navigate('Maps')}
+                onPress={() => navigation.navigate('MapsEventos', concerts)}
               />
             </View>
             <View style={css.iconEdit}>
@@ -158,15 +157,6 @@ const Evento = ({ navigation }) => {
               <View style={css.rows}>
                 <Text style={css.label}>Evento: </Text>
                 <Text style={css.tittle}>{item.name}</Text>
-              </View>
-              <View style={css.rows}>
-                <Text style={css.label}>Estabelecimento: </Text>
-                <Text
-                  multimultiline={true}
-                  numberOfLines={2}
-                  style={css.tittle}>
-                  {item.id}
-                </Text>
               </View>
               <View style={css.rows}>
                 <Text style={css.label}>Data: </Text>
@@ -213,12 +203,12 @@ const Evento = ({ navigation }) => {
     };
     return (
       <View style={css.containerList}>
-        <Text style={css.title}>Seus eventos</Text>
+        <Text style={css.title}>Meus Eventos</Text>
         <View style={css.scroll}>
           <FlatList
             removeClippedSubviews={false}
             keyExtractor={item => item.id}
-            data={concerts}
+            data={concerts.concerts}
             renderItem={EventoEstabelecimento}
           />
         </View>

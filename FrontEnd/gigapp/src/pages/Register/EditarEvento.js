@@ -25,7 +25,7 @@ const EditarEvento = ({ route, navigation }) => {
   const [nomeEvento, setNomeEvento] = useState(route.params.item.name);
   const [descricaoEvento, setDescricaoEvento] = useState(route.params.item.description);
   const [valorEvento, setValorEvento] = useState(route.params.item.ticketPrice);
-  const [dataInicial, setDataInicial] = useState(route.params.item.date);  
+  const [dataInicial, setDataInicial] = useState(new Date());  
 
   const updateConcert = async () => {
     if (nomeEvento && descricaoEvento && valorEvento && dataInicial) {

@@ -87,7 +87,9 @@ class ConcertController {
     async show(req, res) {
 
         try {
-            const concerts = await Concert.findAll();
+            const concerts = await Concert.findAll(
+                { include: { association: 'venue' } }
+            );
             return res.json(concerts);
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });

@@ -53,21 +53,24 @@ const Home = ({ navigation }) => {
   useEffect(async () => {
     const concerts = await services.getConcerts();
     setConcerts(concerts);
-    
-  }, [concerts]);
+
+  }, []);
 
   //insert band (candidatar-se)
   async function handleInsert(id, token) {
-    console.log(id);
+
     try {
       await services.insertBandsInConcert(id, token)
 
     } catch (error) {
       console.log('deu ruim ', error);
     }
-  }
-//=============================================
 
+  }
+
+  //console.log(concerts[0].venue)
+
+  //=============================================
 
   if (!user.provider) {
     const EventoBanda = ({ item }) => {
@@ -79,7 +82,7 @@ const Home = ({ navigation }) => {
                 name={'locate'}
                 size={16}
                 color={'#FF6400'}
-                onPress={() => navigation.navigate('Maps')}
+                onPress={() => navigation.navigate('Maps',  item )}
               />
             </View>
           </View>
@@ -95,7 +98,7 @@ const Home = ({ navigation }) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.tittle}>
-                  {item.description}
+                  {item.venue.name}
                 </Text>
               </View>
               <View style={css.rows}>
@@ -160,7 +163,7 @@ const Home = ({ navigation }) => {
                 name={'locate'}
                 size={16}
                 color={'#FF6400'}
-                onPress={() => navigation.navigate('Maps')}
+                onPress={() => navigation.navigate('Maps',  item )}
               />
             </View>
           </View>
@@ -176,7 +179,7 @@ const Home = ({ navigation }) => {
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.tittle}>
-                  {item.name}
+                  {item.venue.name}
                 </Text>
               </View>
               <View style={css.rows}>
