@@ -36,7 +36,7 @@ const Avaliacao = ({navigation}) => {
       try {
         // const response = await api.post('/novasTarefas', { "nome": nomeLista, "descricao": descricaoLista, "data": dataLista });
         // console.log(JSON.stringify(response.data));
-        console.log('Nota Evento:' + ' ' + notaEvento);
+        console.log('Nota:' + ' ' + notaEvento);
       } catch (error) {
         console.log('DEU RUIM' + error);
       }
@@ -100,7 +100,7 @@ const Avaliacao = ({navigation}) => {
               })}
             </Picker>
           </View>
-          <TouchableOpacity style={css.button} onPress={() => handleRatingVenues}>
+          <TouchableOpacity style={css.button} onPress={() => avaliarEvento}>
             <Text style={css.buttonText}>Avaliar</Text>
           </TouchableOpacity>
         </View>
@@ -130,7 +130,7 @@ const Avaliacao = ({navigation}) => {
               })}
             </Picker>
           </View>
-          <TouchableOpacity style={css.button} onPress={handleRatingBands}>
+          <TouchableOpacity style={css.button} onPress={avaliarEvento}>
             <Text style={css.buttonText}>Avaliar</Text>
           </TouchableOpacity>
         </View>
