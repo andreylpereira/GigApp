@@ -25,10 +25,10 @@ module.exports = {
             rejectUnauthorized: false
         }
     },
-    host: 'ec2-52-0-114-209.compute-1.amazonaws.com',
-    username: 'giftmojlglgsbe',
-    password: '1acd9b982bcc1045d39f66ee450b6a9e5c91e02914a98bf14d461b2e40d94b1e',
-    database: 'd2uc06nd8h6o51',
+    host: 'ec2-52-6-77-239.compute-1.amazonaws.com',
+    username: 'wlkbalitflrxuk',
+    password: '948b3bfb1b4ce96727167dc17f58f4a3328f8fe8c589ec2036431ebd0dce2e2b',
+    database: 'dcpjsatobsopbq',
     ssl: true,
     define: {
         timestamps: true,
