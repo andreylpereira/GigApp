@@ -108,6 +108,16 @@ class Services {
     }
   }
 
+  async getBandsForApprovedInConcert(id) {
+    try {
+      const response = await api.get(`/concerts/${id}/bands`);
+      console.log(JSON.stringify(response.data));
+      return response.data;
+    } catch (error) {
+      console.log('Cannot get concerts ', error);
+    }
+  }
+
   //=========================================/
 
   //função base para banda se candidatar

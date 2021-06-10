@@ -1,93 +1,95 @@
-import React, {useState} from 'react';
-import {useAuth} from '../../context/auth';
-import {FlatList} from 'react-native';
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../context/auth';
+import { FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import services from '../../services/services';
 
 
-const SelecaoBanda = ({navigation}) => {
-  const eventos_mock = [
-    {
-      
-      id: 1,
-      nome: 'The Strokes',
-      estilo: 'indie-rock',
-      nota: '10,0',
-      image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t1.6435-9/67085468_447690615812843_5370234486225108992_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=973b4a&_nc_ohc=V11hCKO4aUEAX8Smios&_nc_ht=scontent.fbnu4-1.fna&oh=08d20d3c827f8f3b410fa598b82752f8&oe=60DBD764',
-    },
-    {
-      id: 2,
-      nome: 'Arctic Monkeys',
-      estilo: 'indie',
-      nota: '9,0',
-      image: 'https://lh3.googleusercontent.com/QeW037SIb2_TdDiTyj25_yRHWMMKVWM4_sIVPkehyP9d7bnrdnrx9e89Fk6pKiUTjTk',
-    },
-    {
-      id: 3,
-      nome: 'The Queens of Stone Age',
-      estilo: 'rock',
-      nota: '8,0',
-      image: 'http://crashtv.com.br/site/wp-content/uploads/zf-hvvgc.jpg',
-    },
-    {
-      id: 4,
-      nome: 'Massacration',
-      estilo: 'Metal of Gods',
-      nota: '7,0',
-      image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t31.18172-8/12828527_1072891716064981_1858112013587377217_o.jpg?_nc_cat=104&ccb=1-3&_nc_sid=973b4a&_nc_ohc=2JmnBrHotigAX8qnNAp&_nc_ht=scontent.fbnu4-1.fna&oh=c00886c9fe0d882a0b81c4a1ee262e26&oe=60DC29A5',
-    },
-    {
-      id: 5,
-      nome: 'molejão',
-      estilo: 'pagode',
-      nota: '6,0',
-      image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t1.6435-9/70426955_116623033058590_1922075543738515456_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=973b4a&_nc_ohc=6J7RXh3GnOIAX_DkGSi&_nc_ht=scontent.fbnu4-1.fna&oh=3fe453cc176796f9e9e06415d6437fae&oe=60DDEE39',
-    },
-    {
-      id: 6,
-      nome: 'Garotos de ouro',
-      estilo: 'Forró',
-      nota: '5,0',
-      image: 'https://miro.medium.com/max/1232/1*6Ba5uj_WqMYePYYXENN8XA.jpeg',
-    },
-    {
-      id: 7,
-      nome: 'Garotos de ouro1',
-      estilo: 'Forró',
-      nota: '5,0',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkIvZUsKDcRWcAKzteqsooUPNSloduC2ox7PmeFNPw3aT4i1-C',
-    },
-    {
-      id: 8,
-      nome: 'Garotos de ouro2',
-      estilo: 'Forró',
-      nota: '5,0',
-      image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t1.18169-9/11071540_822933687797692_6461748506729387990_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=973b4a&_nc_ohc=SZOxkh9bhgUAX8AUFZl&_nc_ht=scontent.fbnu4-1.fna&oh=53fefede97dd5030417153f98f8b7c4e&oe=60DC8764',
-    },
-  ];
+const SelecaoBanda = ({ route, navigation }) => {
 
+  // const eventos_mock = [
+  //   {
+
+  //     id: 1,
+  //     nome: 'The Strokes',
+  //     estilo: 'indie-rock',
+  //     nota: '10,0',
+  //     image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t1.6435-9/67085468_447690615812843_5370234486225108992_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=973b4a&_nc_ohc=V11hCKO4aUEAX8Smios&_nc_ht=scontent.fbnu4-1.fna&oh=08d20d3c827f8f3b410fa598b82752f8&oe=60DBD764',
+  //   },
+  //   {
+  //     id: 2,
+  //     nome: 'Arctic Monkeys',
+  //     estilo: 'indie',
+  //     nota: '9,0',
+  //     image: 'https://lh3.googleusercontent.com/QeW037SIb2_TdDiTyj25_yRHWMMKVWM4_sIVPkehyP9d7bnrdnrx9e89Fk6pKiUTjTk',
+  //   },
+  //   {
+  //     id: 3,
+  //     nome: 'The Queens of Stone Age',
+  //     estilo: 'rock',
+  //     nota: '8,0',
+  //     image: 'http://crashtv.com.br/site/wp-content/uploads/zf-hvvgc.jpg',
+  //   },
+  //   {
+  //     id: 4,
+  //     nome: 'Massacration',
+  //     estilo: 'Metal of Gods',
+  //     nota: '7,0',
+  //     image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t31.18172-8/12828527_1072891716064981_1858112013587377217_o.jpg?_nc_cat=104&ccb=1-3&_nc_sid=973b4a&_nc_ohc=2JmnBrHotigAX8qnNAp&_nc_ht=scontent.fbnu4-1.fna&oh=c00886c9fe0d882a0b81c4a1ee262e26&oe=60DC29A5',
+  //   },
+  //   {
+  //     id: 5,
+  //     nome: 'molejão',
+  //     estilo: 'pagode',
+  //     nota: '6,0',
+  //     image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t1.6435-9/70426955_116623033058590_1922075543738515456_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=973b4a&_nc_ohc=6J7RXh3GnOIAX_DkGSi&_nc_ht=scontent.fbnu4-1.fna&oh=3fe453cc176796f9e9e06415d6437fae&oe=60DDEE39',
+  //   },
+  //   {
+  //     id: 6,
+  //     nome: 'Garotos de ouro',
+  //     estilo: 'Forró',
+  //     nota: '5,0',
+  //     image: 'https://miro.medium.com/max/1232/1*6Ba5uj_WqMYePYYXENN8XA.jpeg',
+  //   },
+  //   {
+  //     id: 7,
+  //     nome: 'Garotos de ouro1',
+  //     estilo: 'Forró',
+  //     nota: '5,0',
+  //     image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkIvZUsKDcRWcAKzteqsooUPNSloduC2ox7PmeFNPw3aT4i1-C',
+  //   },
+  //   {
+  //     id: 8,
+  //     nome: 'Garotos de ouro2',
+  //     estilo: 'Forró',
+  //     nota: '5,0',
+  //     image: 'https://scontent.fbnu4-1.fna.fbcdn.net/v/t1.18169-9/11071540_822933687797692_6461748506729387990_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=973b4a&_nc_ohc=SZOxkh9bhgUAX8AUFZl&_nc_ht=scontent.fbnu4-1.fna&oh=53fefede97dd5030417153f98f8b7c4e&oe=60DC8764',
+  //   },
+  // ];  
 
   const { user, token } = useAuth();
+  const [concerts, setConcerts] = useState([]);
+  const [id, setId] = useState(route.params.item.id);
 
-  async function handleSelect(id, token) {
-    console.log(id);
-    try {
-      await services.deleteConcerts(id, token)
+  // async function handleSelect(id, token) {    
+  //   try {
+  //     await services.deleteConcerts(id, token)
 
-    } catch (error) {
-      console.log('deu ruim ', error);
-    }
-  }
+  //   } catch (error) {
+  //     console.log('deu ruim ', error);
+  //   }
+  // }
 
-  // useEffect(async () => {
-  //   const concerts = await services.getConcerts();
-  //   setConcerts(concerts);
+  useEffect(async () => {
+    const bands = await services.getBandsForApprovedInConcert(id);
+    console.log(id)
+    setConcerts(bands);
 
-  // }, [concerts]);
+  }, []);
 
 
-  const SelecionarBanda = ({item}) => {
+  const SelecionarBanda = ({ item }) => {
 
     return (
       <View>
@@ -95,23 +97,23 @@ const SelecaoBanda = ({navigation}) => {
           <View>
             <View style={css.content}>
               <View>
-                <View style={{alignSelf: 'center'}}>
+                <View style={{ alignSelf: 'center' }}>
                   <Image
                     style={css.image}
                     resizeMode="cover"
-                    source={{uri: item.image}}
+                    source={{ uri: item.image }}
                   />
                 </View>
-                <View style={{alignSelf: 'center'}}>
-                  <Text style={css.tittle}>{item.nome}</Text>
+                <View style={{ alignSelf: 'center' }}>
+                  <Text style={css.tittle}>{item.name}</Text>
                   <Text
                     multimultiline={true}
                     numberOfLines={2}
                     style={css.subtittle}>
-                    {item.estilo}
+                    {item.style}
                   </Text>
                   <View style={css.starLine}>
-                    <Text style={css.starLineText}>{item.nota}</Text>
+                    <Text style={css.starLineText}>{item.rating}</Text>
                     <Icon
                       name="star"
                       color={'#FCC51C'}
@@ -139,7 +141,7 @@ const SelecaoBanda = ({navigation}) => {
       <View style={css.scroll}>
         <FlatList
           removeClippedSubviews={false}
-          data={eventos_mock}
+          data={concerts}
           renderItem={SelecionarBanda}
           keyExtractor={item => item.id}></FlatList>
       </View>

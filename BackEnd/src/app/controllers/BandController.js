@@ -1,5 +1,6 @@
 import Band from '../models/Band';
 import Concert from '../models/Concert';
+import ConcertBands from '../models/ConcertBand';
 
 class BandController {
     async store(req, res) {
@@ -85,9 +86,14 @@ class BandController {
         try {
             const { concert_id } = req.params;
 
-            const concert = await Concert.findByPk(concert_id, {
-                include: { association: 'bands' }
-            });
+            const concert = await Concert.findByPk(concert_id,
+                {
+                    include:
+                    {
+                        association: 'bands',
+                        through: { attributes: ['approved'], where: { approved: true } }
+                    }
+                });
 
             return res.json(concert.bands);
 
@@ -102,19 +108,19 @@ class BandController {
         try {
 
             const { concert_id } = req.params;
-            const { name, approved, band_id } = req.body;
+            const { name, approved } = req.body;
 
             const concert = await Concert.findByPk(concert_id);
-            
+
             if (!concert) {
                 return res.status(400).json({ error: 'Concert not found' });
             }
 
             const [band] = await Band.findAll({
                 where: { name }
-            })            
-            
-            await concert.addBand(band);
+            })
+
+            await concert.addBand(band, { through: { approved: true } });
 
             return res.json(band);
 

@@ -32,7 +32,7 @@ const Evento = ({ navigation }) => {
     setConcerts(concerts);
 
   }, []);
-
+  
   if (!user.provider) {
     const EventoBanda = ({ item }) => {
 
@@ -188,12 +188,12 @@ const Evento = ({ navigation }) => {
             <View style={css.buttons}>
               <TouchableOpacity
                 style={css.button}
-                onPress={() => navigation.navigate('SelecaoBanda')}>
+                onPress={() => navigation.navigate('SelecaoBanda', { item })}>
                 <Text style={css.buttonText}>Selecionar Banda</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={css.button}
-                onPress={() => navigation.navigate('AvaliacaoBanda')}>
+                onPress={() => navigation.navigate('AvaliacaoBanda', { item })}>
                 <Text style={css.buttonText}>Avaliar Banda</Text>
               </TouchableOpacity>
             </View>
