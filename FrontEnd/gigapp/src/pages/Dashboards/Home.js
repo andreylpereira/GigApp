@@ -57,15 +57,16 @@ const Home = ({ navigation }) => {
   }, []);
 
   //insert band (candidatar-se)
-  async function handleInsert(id, token) {
+  //async 
+  function handleInsert() {
+    console.log('banda se candidatou')
+    // try {
+    //   await services.insertBandsInConcert(id, token)
 
-    try {
-      await services.insertBandsInConcert(id, token)
-
-    } catch (error) {
-      console.log('deu ruim ', error);
-    }
-
+    // } catch (error) {
+    //   console.log('deu ruim ', error);
+    // }
+    
   }
 
   //console.log(concerts[0].venue)
@@ -127,7 +128,7 @@ const Home = ({ navigation }) => {
             <View style={css.buttons}>
               <TouchableOpacity
                 style={css.button}
-                onPress={() => handleInsert}>
+                onPress={() => handleInsert()}>
                 <Text style={css.buttonText}>Candidatar-se</Text>
               </TouchableOpacity>
               {/* <TouchableOpacity
