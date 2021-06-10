@@ -1,8 +1,11 @@
 import Band from '../models/Band';
+import Concert from '../models/Concert';
 
 class BandController {
     async store(req, res) {
         try {
+
+            const { concert_id } = req.params;
 
             const { name, email, password, phone, style, description, rating, lat, long, image } = req.body;
 
@@ -66,14 +69,89 @@ class BandController {
 
     // async index() { }
     async show(req, res) {
+
         try {
             const bands = await Band.findAll();
             return res.json(bands);
+
         } catch (error) {
             res.status(500).send({ message: 'An error occurred ' + error });
             console.log(error);
         }
     }
+
+    async index(req, res) {
+
+        try {
+            const { concert_id } = req.params;
+
+            const concert = await Concert.findByPk(concert_id, {
+                include: { association: 'bands' }
+            });
+
+            return res.json(concert.bands);
+
+        } catch (error) {
+            res.status(500).send({ message: 'An error occurred ' + error });
+            console.log(error);
+        }
+    }
+
+    async storeWithConcert(req, res) {
+
+        try {
+
+            const { concert_id } = req.params;
+            const { name, approved, band_id } = req.body;
+
+            const concert = await Concert.findByPk(concert_id);
+            
+            if (!concert) {
+                return res.status(400).json({ error: 'Concert not found' });
+            }
+
+            const [band] = await Band.findAll({
+                where: { name }
+            })            
+            
+            await concert.addBand(band);
+
+            return res.json(band);
+
+        } catch (error) {
+            res.status(500).send({ message: 'An error occurred ' + error });
+            console.log(error);
+        }
+    }
+
+    async deleteWithConcert(req, res) {
+
+        try {
+
+            const { concert_id } = req.params;
+            const { name } = req.body;
+
+            const concert = await Concert.findByPk(concert_id);
+
+            if (!concert) {
+                return res.status(400).json({ error: 'Concert not found' });
+            }
+
+            const band = await Band.findOne({
+                where: { name }
+            });
+
+            await concert.removeBand(band);
+
+            return res.json();
+
+        } catch (error) {
+            res.status(500).send({ message: 'An error occurred ' + error });
+            console.log(error);
+        }
+    }
+
+
     // async delete() { }
 
 }

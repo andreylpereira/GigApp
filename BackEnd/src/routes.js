@@ -33,8 +33,12 @@ routes.post('/venues', VenueController.store);
 routes.get('/venues/:venue_id/concerts', ConcertController.index);
 routes.post('/venues/:venue_id/concerts', ConcertController.store);
 
+routes.get('/concerts/:concert_id/bands', BandController.index);
+routes.post('/concerts/:concert_id/bands', BandController.storeWithConcert);
+routes.delete('/concerts/:concert_id/bands', BandController.deleteWithConcert);
+
 routes.get('/concerts', ConcertController.show);
-//routes.post('/concerts', AuthMiddleware, ConcertController.store);
+//routes.post('/concerts', ConcertController.store);
 routes.get('/concerts/:id', ConcertController.showWithId);
 routes.delete('/concerts/:id', AuthMiddleware, ConcertController.delete);
 routes.put('/concerts/:id', AuthMiddleware, ConcertController.update);

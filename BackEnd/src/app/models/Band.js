@@ -20,6 +20,7 @@ class Band extends Model {
       },
       {
         sequelize,
+        tableName: 'bands',
       }
     );
 
