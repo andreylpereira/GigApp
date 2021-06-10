@@ -181,6 +181,13 @@ const css = StyleSheet.create({
     fontSize: 21,
     elevation: 10,
   },
+  tittle: {
+    textAlign: 'center',
+    marginTop: 5,
+    fontFamily: 'Nunito-Bold',
+    fontSize: 21,
+    elevation: 10,
+  },
 });
 
 export default CadastroEvento;

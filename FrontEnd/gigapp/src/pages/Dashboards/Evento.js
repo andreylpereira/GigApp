@@ -80,15 +80,16 @@ const Evento = ({ navigation }) => {
                 <Text style={css.label}>Entrada: </Text>
                 <Text style={css.tittle}>{item.ticketPrice}</Text>
               </View>
+              {/*
               <View style={css.rows}>
                 <Text style={css.label}>Banda: </Text>
                 <Text
                   multimultiline={true}
                   numberOfLines={2}
                   style={css.description}>
-                  {/* {item.banda1}, {item.banda2} */}
+                   {item.banda1}, {item.banda2} 
                 </Text>
-              </View>
+              </View>*/}
             </View>
             <View style={css.buttons}>
               {/* <TouchableOpacity
