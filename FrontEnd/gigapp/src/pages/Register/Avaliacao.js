@@ -31,18 +31,18 @@ const Avaliacao = ({navigation}) => {
   ]);
   const [notaEvento, setNotaEvento] = useState([]);
 
-  const avaliarEvento = async () => {
-    if (notaEvento) {
-      try {
+function avaliarEvento() {
+    // if (notaEvento) {
+    //   try {
         // const response = await api.post('/novasTarefas', { "nome": nomeLista, "descricao": descricaoLista, "data": dataLista });
         // console.log(JSON.stringify(response.data));
         console.log('Nota:' + ' ' + notaEvento);
-      } catch (error) {
-        console.log('DEU RUIM' + error);
-      }
-    } else {
-      console.log('Vazio');
-    }
+    //   } catch (error) {
+    //     console.log('DEU RUIM' + error);
+    //   }
+    // } else {
+    //   console.log('Vazio');
+    // }
     Keyboard.dismiss();
     navigation.goBack();
   };
@@ -100,7 +100,7 @@ const Avaliacao = ({navigation}) => {
               })}
             </Picker>
           </View>
-          <TouchableOpacity style={css.button} onPress={() => avaliarEvento}>
+          <TouchableOpacity style={css.button} onPress={() => avaliarEvento()}>
             <Text style={css.buttonText}>Avaliar</Text>
           </TouchableOpacity>
         </View>
@@ -130,7 +130,7 @@ const Avaliacao = ({navigation}) => {
               })}
             </Picker>
           </View>
-          <TouchableOpacity style={css.button} onPress={avaliarEvento}>
+          <TouchableOpacity style={css.button} onPress={avaliarEvento()}>
             <Text style={css.buttonText}>Avaliar</Text>
           </TouchableOpacity>
         </View>

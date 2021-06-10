@@ -395,8 +395,8 @@ const Maps = ({ route, navigation }) => {
                     <View style={css.gridColunm}>
                       <View style={{ alignSelf: 'center', marginBottom: 5 }}>
                         <View style={css.gridRow}>
-                          <Text style={css.mapTextTittle}>Dazaranha</Text>
-                          <Text style={css.note}>10,0</Text>
+                          <Text style={css.mapTextTittle}>The Strokes</Text>
+                          <Text style={css.note}>9,0</Text>
                           <Icon
                             name="star"
                             color={'#FCC51C'}
@@ -421,7 +421,7 @@ const Maps = ({ route, navigation }) => {
                           <Image
                             style={css.image}
                             resizeMode="cover"
-                            source={{ uri: 'https://i.ytimg.com/vi/6dtF7NhJDvA/maxresdefault.jpg' }}
+                            source={{ uri: 'https://lh3.googleusercontent.com/QeW037SIb2_TdDiTyj25_yRHWMMKVWM4_sIVPkehyP9d7bnrdnrx9e89Fk6pKiUTjTk' }}
                           />
                         </Text>
 
