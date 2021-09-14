@@ -13,4 +13,4 @@ Marzeu Selau Junior - https://github.com/Marzeu
 
 Raphael Matsumoto - https://github.com/raphamatsu
 
-Renan Silva - https://github.com/renans04
+Renan Silva - https://github.com/rrenans
